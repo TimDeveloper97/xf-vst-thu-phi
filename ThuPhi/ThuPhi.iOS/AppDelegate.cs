@@ -23,6 +23,15 @@ namespace ThuPhi.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+
+            #region Style Init
+            App.ScreenHeight = (int)UIScreen.MainScreen.Bounds.Height;
+            App.ScreenWidth = (int)UIScreen.MainScreen.Bounds.Width;
+
+            Plugin.MaterialDesignControls.iOS.Renderer.Init();
+            //XF.Material.iOS.Material.Init();
+            #endregion
+
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
