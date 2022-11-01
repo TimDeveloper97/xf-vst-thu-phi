@@ -23,15 +23,15 @@
     <key>MinimumOSVersion</key>
     <string>8.0</string>
     <key>CFBundleDisplayName</key>
-    <string>vst_thu_phi</string>
+    <string>ThuPhi</string>
     <key>CFBundleIdentifier</key>
-    <string>com.companyname.vst_thu_phi</string>
+    <string>com.companyname.ThuPhi</string>
     <key>CFBundleVersion</key>
     <string>1.0</string>
     <key>UILaunchStoryboardName</key>
     <string>LaunchScreen</string>
     <key>CFBundleName</key>
-    <string>vst_thu_phi</string>
+    <string>ThuPhi</string>
     <key>XSAppIconAssets</key>
     <string>Assets.xcassets/AppIcon.appiconset</string>
 </dict>

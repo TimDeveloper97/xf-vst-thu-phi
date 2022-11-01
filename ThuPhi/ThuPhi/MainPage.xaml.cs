@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace vst_thu_phi
+namespace ThuPhi
 {
     public partial class MainPage : ContentPage
     {

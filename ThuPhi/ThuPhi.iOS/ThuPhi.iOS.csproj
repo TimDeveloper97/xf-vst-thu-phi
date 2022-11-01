@@ -5,13 +5,13 @@
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{5E04F2CA-5BD1-44C7-9F92-30D4B2E939C2}</ProjectGuid>
+    <ProjectGuid>{3B69FB3B-1FFE-4A12-B551-11C5C1B05E83}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TemplateGuid>{6143fdea-f3c2-4a09-aafa-6e230626515e}</TemplateGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>vst_thu_phi.iOS</RootNamespace>
+    <RootNamespace>ThuPhi.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>vst-thu-phi.iOS</AssemblyName>
+    <AssemblyName>ThuPhi.iOS</AssemblyName>
     <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
     <ProvisioningType>automatic</ProvisioningType>
@@ -128,9 +128,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\vst-thu-phi\vst-thu-phi.csproj">
-      <Project>{2D2A7A45-D07E-439A-BC3D-0B415514BA3F}</Project>
-      <Name>vst-thu-phi</Name>
+    <ProjectReference Include="..\ThuPhi\ThuPhi.csproj">
+      <Project>{38454C26-75C3-48ED-B6F2-73BC207A066E}</Project>
+      <Name>ThuPhi</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

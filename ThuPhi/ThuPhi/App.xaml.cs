@@ -2,7 +2,7 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace vst_thu_phi
+namespace ThuPhi
 {
     public partial class App : Application
     {

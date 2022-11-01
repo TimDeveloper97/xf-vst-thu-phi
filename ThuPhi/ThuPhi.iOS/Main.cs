@@ -5,7 +5,7 @@ using System.Linq;
 using Foundation;
 using UIKit;
 
-namespace vst_thu_phi.iOS
+namespace ThuPhi.iOS
 {
     public class Application
     {
