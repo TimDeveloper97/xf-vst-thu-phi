@@ -8,23 +8,6 @@
              xmlns:page="clr-namespace:ThuPhi.Pages"
              
              x:Class="ThuPhi.MobileShell">
-    <Shell.Resources>
-        <ResourceDictionary>
-            <Style x:Key="BaseStyle" TargetType="Element">
-                <Setter Property="Shell.BackgroundColor" Value="{StaticResource AppColor}" />
-                <Setter Property="Shell.ForegroundColor" Value="White" />
-                <Setter Property="Shell.TitleColor" Value="White" />
-                <Setter Property="Shell.DisabledColor" Value="{StaticResource GrayLight}" />
-                <Setter Property="Shell.UnselectedColor" Value="{StaticResource GrayLight}" />
-                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource AppColor}" />
-                <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
-                <Setter Property="Shell.TabBarUnselectedColor" Value="{StaticResource GrayLight}"/>
-                <Setter Property="Shell.TabBarTitleColor" Value="White"/>
-            </Style>
-            <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
-            <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
-        </ResourceDictionary>
-    </Shell.Resources>
 
     <ShellItem Route="LoginPage">
         <ShellContent ContentTemplate="{DataTemplate page:LoginPage}" />

@@ -49,8 +49,5 @@
 			<Generator>ResXFileCodeGenerator</Generator>
 			<LastGenOutput>LanguageResource.Designer.cs</LastGenOutput>
 		</EmbeddedResource>
-		<EmbeddedResource Update="Resources\Styles\Colors.xaml">
-			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-		</EmbeddedResource>
 	</ItemGroup>
 </Project>

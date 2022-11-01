@@ -29,9 +29,9 @@ namespace ThuPhi
             //Routing.RegisterRoute(nameof(DeviceV30Page), typeof(DeviceV30Page));
         }
 
-        //private async void OnMenuItemClicked(object sender, EventArgs e)
-        //{
-        //    await Shell.Current.GoToAsync("//LoginPage");
-        //}
+        private async void OnMenuItemClicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync("//LoginPage");
+        }
     }
 }
