@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xaml-comp compile="true" ?>
 <ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <x:Double x:Key="Title">20</x:Double>
@@ -47,18 +48,7 @@
         <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}"/>
         <Setter Property="BorderWidth" Value="1"/>
     </Style>
-    <Style x:Key="EntryBorderStyle" TargetType="Border">
-        <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}"/>
-        <Setter Property="StrokeThickness" Value="1"/>
-        <Setter Property="BackgroundColor" Value="Transparent"/>
-        <Setter Property="HeightRequest" Value="55"/>
-        <Setter Property="Padding" Value="10"/>
-        <Setter Property="StrokeShape">
-            <Setter.Value>
-                <RoundRectangleGeometry CornerRadius="10"/>
-            </Setter.Value>
-        </Setter>
-    </Style>
+    
     <Style x:Key="BasicEntryStyle" TargetType="Entry">
         <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}"/>
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}"/>
