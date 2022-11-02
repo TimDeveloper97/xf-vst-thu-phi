@@ -1,14 +1,17 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xaml-comp compile="true" ?>
 <ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:mdc="clr-namespace:Plugin.MaterialDesignControls;assembly=Plugin.MaterialDesignControls">
     <!--#region Color -->
-    <Color x:Key="AppColor">#1ba8ff</Color>
+    <Color x:Key="AppColor">#88221a</Color>
     <Color x:Key="Red">#ff424e</Color>
     <Color x:Key="Blue">#508ce8</Color>
     <Color x:Key="Green">#32CD32</Color>
     <Color x:Key="Primary">#512BD4</Color>
     <Color x:Key="Secondary">#DFD8F7</Color>
     <Color x:Key="Tertiary">#2B0B98</Color>
+    <Color x:Key="Sky">#a699cf</Color>
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>
     <Color x:Key="Gray100">#E1E1E1</Color>
@@ -53,7 +56,7 @@
     </Style>
 
     <Style TargetType="Grid">
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray950}}"/>
     </Style>
 
     <Style TargetType="IndicatorView">
@@ -165,7 +168,9 @@
     <Style TargetType="Frame">
         <Setter Property="HasShadow" Value="False" />
         <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray950}}" />
-        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}" />
+        <Setter Property="CornerRadius" Value="5" />
+        <Setter Property="Padding" Value="0"/>
     </Style>
 
     <Style TargetType="ImageButton">
@@ -420,7 +425,11 @@
     <!--#region Config -->
     <x:Double x:Key="Title">20</x:Double>
     <x:Double x:Key="SubTitle">17</x:Double>
+    <x:Double x:Key="MiniTitle">15</x:Double>
     <x:Double x:Key="Header">30</x:Double>
+    <x:Double x:Key="CornerRadius">5</x:Double>
+    <x:Double x:Key="Padding">10</x:Double>
+    <x:Double x:Key="Margin">10</x:Double>
 
     <Style x:Key="IconLabel" TargetType="Label">
         <Setter Property="FontSize" Value="27" />
@@ -482,6 +491,47 @@
         <Setter Property="VerticalOptions" Value="Start"/>
         <Setter Property="CornerRadius" Value="10"/>
         <Setter Property="Margin" Value="10,20"/>
+    </Style>
+
+    <Style x:Key="GroupGridStyle" TargetType="Grid">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray900}}"/>
+    </Style>
+
+    <Style TargetType="mdc:MaterialButton">
+        <Setter Property="TextColor" Value="{StaticResource White}"/>
+        <Setter Property="FontSize" Value="{StaticResource SubTitle}"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource AppColor}"/>
+        <Setter Property="CornerRadius" Value="0"/>
+    </Style>
+    <Style TargetType="mdc:MaterialEntry">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+        <Setter Property="FontSize" Value="{StaticResource SubTitle}"/>
+        <Setter Property="LabelSize" Value="{StaticResource SubTitle}"/>
+        <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray900}}"/>
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray950}}"/>
+        <Setter Property="CornerRadius" Value="0"/>
+        <Setter Property="Padding" Value="5,0"/>
+        <Setter Property="Type" Value="Filled"/>
+        <Setter Property="LabelMargin" Value="0,0,0,0"/>
+        <Setter Property="Margin" Value="0,10,0,0"/>
+        <Setter Property="LabelTextColor" Value="{StaticResource Sky}"/>
+        <Setter Property="HeightRequest" Value="55"/>
+        <Setter Property="CornerRadius" Value="5"/>
+    </Style>
+    <Style TargetType="mdc:MaterialSwitch">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+        <Setter Property="FontSize" Value="{StaticResource SubTitle}"/>
+        <Setter Property="OnColor" Value="{StaticResource Blue}"/>
+        <Setter Property="Padding" Value="-4,0"/>
+    </Style>
+    <Style TargetType="mdc:MaterialPicker">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray950}}"/>
+        <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray900}}"/>
+        <Setter Property="Type" Value="Filled"/>
+        <Setter Property="Padding" Value="2,2"/>
+        <Setter Property="PickerRowHeight" Value="0"/>
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+        <Setter Property="FontSize" Value="{StaticResource MiniTitle}"/>
     </Style>
     <!--#endregion-->
 

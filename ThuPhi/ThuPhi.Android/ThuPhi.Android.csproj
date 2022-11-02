@@ -92,7 +92,9 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\language.png" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ThuPhi\ThuPhi.csproj">
       <Project>{38454C26-75C3-48ED-B6F2-73BC207A066E}</Project>

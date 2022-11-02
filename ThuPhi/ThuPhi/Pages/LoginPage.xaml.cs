@@ -14,7 +14,7 @@ namespace ThuPhi.Pages
     {
         public LoginPage()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }

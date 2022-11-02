@@ -21,10 +21,38 @@
     </ContentPage.Behaviors>
 
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+            <!--#region Language -->
+            <Grid HorizontalOptions="End" VerticalOptions="Start" Margin="{StaticResource Margin}">
+                <mdc:MaterialPicker ItemsSource="{Binding Languages}" LeadingIcon="language"
+                                    SelectedItem="{Binding SelectedLanguage}"/>
+            </Grid>
+            <!--#endregion-->
+
+            <Frame HorizontalOptions="Fill" VerticalOptions="Center"
+                   Margin="20,0">
+                <StackLayout>
+                    <StackLayout BackgroundColor="{StaticResource AppColor}" Padding="{StaticResource Padding}">
+                        <Label Text="V.S.T." TextColor="White" FontSize="{StaticResource Title}"/>
+                        <Label Text="Ho Tro Thu Phi" TextColor="White" FontSize="{StaticResource Title}"/>
+                    </StackLayout>
+                    <Grid Margin="1,-6">
+                        <StackLayout Padding="{StaticResource Padding}">
+                            <Label Text="Dang nhap" FontSize="{StaticResource Title}"/>
+                            <StackLayout Padding="10,0,10,10">
+                                <mdc:MaterialEntry LabelText="Ten nguoi dung *"/>
+                                <mdc:MaterialEntry LabelText="Mat khau *"/>
+                                <mdc:MaterialSwitch Text="Giu thong tin dang nhap"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </Grid>
+                    <Grid Style="{StaticResource GroupGridStyle}"
+                          VerticalOptions="Center" Padding="0,10">
+                        <mdc:MaterialButton WidthRequest="100" HorizontalOptions="Center"
+                                            Command="{Binding LoginCommand}" IsBusy="False" Text="SUBMIT"/>
+                    </Grid>
+                </StackLayout>
+            </Frame>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
