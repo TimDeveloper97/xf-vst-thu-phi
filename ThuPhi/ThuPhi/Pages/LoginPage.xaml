@@ -34,15 +34,15 @@
                 <StackLayout>
                     <StackLayout BackgroundColor="{StaticResource AppColor}" Padding="{StaticResource Padding}">
                         <Label Text="V.S.T." TextColor="White" FontSize="{StaticResource Title}"/>
-                        <Label Text="Ho Tro Thu Phi" TextColor="White" FontSize="{StaticResource Title}"/>
+                        <Label Text="Hỗ Trợ Thu Phí" TextColor="White" FontSize="{StaticResource Title}"/>
                     </StackLayout>
                     <Grid Margin="1,-6">
                         <StackLayout Padding="{StaticResource Padding}">
-                            <Label Text="Dang nhap" FontSize="{StaticResource Title}"/>
+                            <Label Text="Đăng nhập" FontSize="{StaticResource Title}"/>
                             <StackLayout Padding="10,0,10,10">
-                                <mdc:MaterialEntry LabelText="Ten nguoi dung *"/>
-                                <mdc:MaterialEntry LabelText="Mat khau *"/>
-                                <mdc:MaterialSwitch Text="Giu thong tin dang nhap"/>
+                                <mdc:MaterialEntry LabelText="Tên người dùng *" Text="{Binding UserName}"/>
+                                <mdc:MaterialEntry LabelText="Mật khẩu *" IsPassword="True" Text="{Binding Password}"/>
+                                <mdc:MaterialSwitch Text="Giữ thông tin đăng nhập" IsToggled="{Binding IsSave}"/>
                             </StackLayout>
                         </StackLayout>
                     </Grid>

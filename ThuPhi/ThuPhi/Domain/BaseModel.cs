@@ -5,6 +5,7 @@ using System.Text;
 
 namespace ThuPhi.Domain
 {
+    
     class BaseModel
     {
         [JsonProperty("#url")]
@@ -15,5 +16,11 @@ namespace ThuPhi.Domain
 
         [JsonProperty("code")]
         public int Code { get; set; }
+
+        [JsonProperty("token")]
+        public string Token { get; set; }
+
+        [JsonProperty("message")]
+        public string Message { get; set; }
     }
 }

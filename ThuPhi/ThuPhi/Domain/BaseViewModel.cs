@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using ThuPhi.Services;
 using Xamarin.Forms;
 
 namespace ThuPhi.Domain
@@ -25,8 +26,10 @@ namespace ThuPhi.Domain
         }
 
         #region Extend
-        
-        protected Api Api { get; set; }
+
+        protected IMainService Service = DependencyService.Get<IMainService>();
+        protected IMessage Message = DependencyService.Get<IMessage>();
+
         protected async Task TimeoutSession(string message)
         {
             //await MaterialDialog.Instance.SnackbarAsync(message: message,

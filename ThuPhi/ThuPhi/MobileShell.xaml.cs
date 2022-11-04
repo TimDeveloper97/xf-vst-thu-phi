@@ -24,6 +24,7 @@ namespace ThuPhi
         {
             await CheckAndRequestPermission();
             DependencyService.Register<Services.Temp.SomeService>();
+            DependencyService.Register<Services.MainService>();
         }
 
         void InitRoute()
