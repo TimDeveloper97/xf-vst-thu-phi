@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ThuPhi.Pages;
+using ThuPhi.Pages.Popup;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -29,7 +31,8 @@ namespace ThuPhi
 
         void InitRoute()
         {
-            //Routing.RegisterRoute(nameof(DeviceV30Page), typeof(DeviceV30Page));
+            Routing.RegisterRoute(nameof(FormPage), typeof(FormPage));
+            Routing.RegisterRoute(nameof(NewFormPopup), typeof(NewFormPopup));
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)

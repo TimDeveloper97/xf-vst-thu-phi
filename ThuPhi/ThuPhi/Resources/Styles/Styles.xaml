@@ -442,7 +442,7 @@
 
     <Style x:Key="TitleLabelStyle" TargetType="Label">
         <Setter Property="Text" Value="fundi"/>
-        <Setter Property="FontSize" Value="{StaticResource Header}"/>
+        <Setter Property="FontSize" Value="{StaticResource Title}"/>
         <Setter Property="FontFamily" Value="PoppinsBoldItalic"/>
         <Setter Property="HorizontalTextAlignment" Value="Center"/>
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}" />
@@ -454,6 +454,13 @@
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}" />
     </Style>
     <Style x:Key="SubHeaderLabelStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="{StaticResource SubTitle}"/>
+        <Setter Property="HorizontalTextAlignment" Value="Center"/>
+        <Setter Property="FontFamily" Value="PoppinsRegular"/>
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}" />
+    </Style>
+    <Style x:Key="MiniLabelStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="{StaticResource MiniTitle}"/>
         <Setter Property="HorizontalTextAlignment" Value="Center"/>
         <Setter Property="FontFamily" Value="PoppinsRegular"/>
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}" />

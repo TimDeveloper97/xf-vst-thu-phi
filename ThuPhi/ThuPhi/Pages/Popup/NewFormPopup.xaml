@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xct:BasePopup xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             
+             Shell.NavBarIsVisible="false"
+             xmlns:mdc="clr-namespace:Plugin.MaterialDesignControls;assembly=Plugin.MaterialDesignControls"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:icon="clr-namespace:ThuPhi.Resources"
+             xmlns:lang="clr-namespace:ThuPhi.Resources.Languages"
+             xmlns:vm="clr-namespace:ThuPhi.ViewModels"
+             Size="300,300"
+             xct:CornerRadiusEffect.CornerRadius="5"
+             IsLightDismissEnabled="False"
+           
+             x:Class="ThuPhi.Pages.Popup.NewFormPopup">
+    <xct:BasePopup.Content>
+        <Grid>
+            <Frame>
+                <StackLayout>
+                    <Grid BackgroundColor="{StaticResource AppColor}" HeightRequest="40">
+                        <Label Text="Cập nhật đợt thu phí" TextColor="White" FontSize="{StaticResource Title}"/>
+                    </Grid>
+                    <Grid Margin="1,-6">
+                        <StackLayout Padding="{StaticResource Padding}">
+                            <Label Text="Đăng nhập" FontSize="{StaticResource Title}"/>
+                            <StackLayout Padding="10,0,10,10">
+                                <mdc:MaterialEntry LabelText="Tên người dùng *" Text="{Binding UserName}"/>
+                                <mdc:MaterialEntry LabelText="Mật khẩu *" IsPassword="True" Text="{Binding Password}"/>
+                                <mdc:MaterialSwitch Text="Giữ thông tin đăng nhập" IsToggled="{Binding IsSave}"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </Grid>
+                </StackLayout>
+            </Frame>
+        </Grid>
+    </xct:BasePopup.Content>
+    
+</xct:BasePopup>
