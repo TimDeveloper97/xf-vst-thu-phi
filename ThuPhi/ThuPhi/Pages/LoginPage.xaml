@@ -29,8 +29,7 @@
             </Grid>
             <!--#endregion-->
 
-            <Frame HorizontalOptions="Fill" VerticalOptions="Center"
-                   Margin="20,0">
+            <Frame HorizontalOptions="Fill" VerticalOptions="Center" Margin="20,0">
                 <StackLayout>
                     <StackLayout BackgroundColor="{StaticResource AppColor}" Padding="{StaticResource Padding}">
                         <Label Text="V.S.T." TextColor="White" FontSize="{StaticResource Title}"/>
@@ -49,7 +48,7 @@
                     <Grid Style="{StaticResource GroupGridStyle}"
                           VerticalOptions="Center" Padding="0,10">
                         <mdc:MaterialButton WidthRequest="100" HorizontalOptions="Center"
-                                            Command="{Binding LoginCommand}" IsBusy="False" Text="SUBMIT"/>
+                                            Command="{Binding LoginCommand}" IsBusy="{Binding IsBusy}" Text="SUBMIT"/>
                     </Grid>
                 </StackLayout>
             </Frame>

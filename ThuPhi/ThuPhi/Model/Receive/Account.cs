@@ -7,6 +7,7 @@ namespace ThuPhi.Model.Receive
 {
     class Account : Send.Login
     {
+        [JsonProperty("Role")]
         public string Role { get; set; }
 
         [JsonProperty("_id")]

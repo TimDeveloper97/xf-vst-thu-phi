@@ -6,6 +6,7 @@ using System.Text;
 using System.Windows.Input;
 using ThuPhi.Domain;
 using ThuPhi.Model.Receive;
+using ThuPhi.Model.Send;
 using ThuPhi.Pages;
 using ThuPhi.Pages.Popup;
 using Xamarin.CommunityToolkit.Extensions;
@@ -25,6 +26,9 @@ namespace ThuPhi.ViewModels
             {
                 parameterToken = Uri.UnescapeDataString(value ?? string.Empty);
                 SetProperty(ref parameterToken, value);
+
+                if (!string.IsNullOrEmpty(parameterToken))
+                    Token = parameterToken;
                 IsBusy = true;
             }
         }
@@ -40,12 +44,7 @@ namespace ThuPhi.ViewModels
 
         public ICommand NewFormPopupCommand => new Command(async () =>
         {
-            //await NavigationExtensions.ShowPopupAsync<Form>(Shell.Current.Navigation, new NewFormPopup());
-            //var result = await NavigationExtensions.ShowPopupAsync<object>(new NewFormPopup());
-            //Console.WriteLine(result);
-            NavigationExtensions.ShowPopup(Shell.Current.Navigation, new NewFormPopup());
-            //var result = await Shell.Current.Navigation.ShowPopupAsync(new NewFormPopup());
-            //Console.WriteLine(result);
+            var x = await Shell.Current.ShowPopupAsync(new NewFormPopup(new FormCode()));
         });
 
         public ICommand SelectCollectionCommand => new Command<Form>(async (obj) =>
@@ -62,25 +61,23 @@ namespace ThuPhi.ViewModels
 
             try
             {
-                var res = await Service.InfoCollection(ParameterToken);
-                if (res == null)
-                {
-                    for (int i = 0; i < 2; i++)
-                    {
-                        Collections.Add(new Form
-                        {
-                            Name = "Công đoàn phí",
-                            Content = "CDP",
-                            Time = DateTime.Now,
-                        });
-                    }
-                    return;
-                }
+                var res = await Service.InfoCollection(Token);
+                if (res == null) return;
 
                 Collections?.Clear();
 
                 foreach (var item in res)
                 {
+                    Collections.Add(item);
+                    Collections.Add(item);
+                    Collections.Add(item);
+                    Collections.Add(item);
+                    Collections.Add(item);
+                    Collections.Add(item);
+                    Collections.Add(item);
+                    Collections.Add(item);
+                    Collections.Add(item);
+                    Collections.Add(item);
                     Collections.Add(item);
                 }
             }
@@ -109,7 +106,7 @@ namespace ThuPhi.ViewModels
 
         void OnLoad()
         {
-            
+
         }
         #endregion
     }

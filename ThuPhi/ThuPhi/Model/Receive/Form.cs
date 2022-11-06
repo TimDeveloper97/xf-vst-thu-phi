@@ -13,14 +13,11 @@ namespace ThuPhi.Model.Receive
         [JsonProperty("NoiDung")]
         public string Content { get; set; }
 
-        [JsonProperty("DanhSach")]
-        public string Html { get; set; }
+        //[JsonProperty("Mau")]
+        //public string Pattern { get; set; }
 
-        [JsonProperty("Mau")]
-        public string Pattern { get; set; }
-
-        [JsonProperty("items")]
-        public List<Info> Items { get; set; }
+        //[JsonProperty("items")]
+        //public List<Info> Items { get; set; }
 
         [JsonProperty("ThoiGian")]
         public DateTime Time { get; set; }

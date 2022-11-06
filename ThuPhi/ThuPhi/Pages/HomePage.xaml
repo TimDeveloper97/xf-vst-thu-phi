@@ -2,13 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              
-             Shell.NavBarIsVisible="false"
+             Shell.NavBarIsVisible="True"
              xmlns:mdc="clr-namespace:Plugin.MaterialDesignControls;assembly=Plugin.MaterialDesignControls"
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              xmlns:icon="clr-namespace:ThuPhi.Resources"
              xmlns:lang="clr-namespace:ThuPhi.Resources.Languages"
              xmlns:vm="clr-namespace:ThuPhi.ViewModels"
              x:Name="self"
+             Title="{Binding Title}"
              
              x:Class="ThuPhi.Pages.HomePage">
     <ContentPage.BindingContext>
@@ -25,80 +26,48 @@
             <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray950}}"/>
         </Style>
     </ContentPage.Resources>
-    
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Cài đặt" Order="Secondary" Priority="0" />
+        <ToolbarItem Text="Đổi mật khẩu" Order="Secondary" Priority="1" />
+        <ToolbarItem Text="Đăng xuất" Order="Secondary" Priority="2" />
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
-        <StackLayout>
-            <!--<Grid BackgroundColor="{StaticResource AppColor}" HeightRequest="60">
-                <Label Style="{StaticResource IconLabel}" Text="{x:Static icon:FontIcons.Home}"
-                       TextColor="White" HorizontalOptions="Start" VerticalOptions="Center" Margin="15,0"/>
-
-                <Label Style="{StaticResource IconLabel}" Text="{x:Static icon:FontIcons.Account}"
-                       TextColor="White" HorizontalOptions="End" VerticalOptions="Center" Margin="15,0"/>
-            </Grid>-->
-            <Grid BackgroundColor="{StaticResource AppColor}" HeightRequest="60">
-                <StackLayout BackgroundColor="{StaticResource AppColor}"
-                             HorizontalOptions="End" VerticalOptions="Center" Orientation="Horizontal">
-                    <Label Style="{StaticResource IconLabel}" Text="{x:Static icon:FontIcons.Home}"
-                           Margin="0,5" TextColor="White" IsVisible="false">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer NumberOfTapsRequired="1" CommandParameter="{Binding .}"
-                                              Command="{Binding Path=BindingContext.HomeCommand, Source={x:Reference Name=self}}"/>
-                        </Label.GestureRecognizers>
-                    </Label>
-                    <Label Style="{StaticResource IconLabel}" Text="{x:Static icon:FontIcons.Account}"
-                           Margin="10,5,15,5" TextColor="White"/>
-                </StackLayout>
-            </Grid>
-            
-            <StackLayout Margin="0,10">
-                <Grid>
-                    <Label Style="{StaticResource IconLabel}" Text="{x:Static icon:FontIcons.PlusThick}"
-                           HorizontalOptions="Start" VerticalOptions="Center" Margin="15,5">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer NumberOfTapsRequired="1" CommandParameter="{Binding .}"
-                                              Command="{Binding Path=BindingContext.NewFormPopupCommand, Source={x:Reference Name=self}}"/>
-                        </Label.GestureRecognizers>
-                    </Label>
-
-                    <StackLayout HorizontalOptions="End" VerticalOptions="Center" Orientation="Horizontal">
-                        <Label Style="{StaticResource IconLabel}" Text="{x:Static icon:FontIcons.Reload}" Margin="0,5">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer NumberOfTapsRequired="1" CommandParameter="{Binding .}"
-                                                      Command="{Binding Path=BindingContext.LoadCollectionCommand, Source={x:Reference Name=self}}"/>
-                            </Label.GestureRecognizers>
-                        </Label>
-                        <Label Style="{StaticResource IconLabel}" Text="{x:Static icon:FontIcons.Filter}" Margin="10,5,15,5"/>
-                    </StackLayout>
-                </Grid>
-                <BoxView/>
-            </StackLayout>
-            <RefreshView Command="{Binding LoadCollectionCommand}" IsRefreshing="{Binding IsBusy}"
+        <Grid>
+            <StackLayout>
+                <RefreshView Command="{Binding LoadCollectionCommand}" IsRefreshing="{Binding IsBusy}"
                          RefreshColor="{StaticResource AppColor}" Margin="10,0">
-                <FlexLayout Direction="Row" Wrap="Wrap" AlignContent="Start" AlignItems="Start"
+                    <ScrollView Margin="0,10,0,0" Padding="0,0,0,30">
+                        <FlexLayout Direction="Row" Wrap="Wrap" AlignContent="Start" AlignItems="Start"
                             JustifyContent="SpaceAround" BindableLayout.ItemsSource="{Binding Collections}">
 
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-                            <Frame HasShadow="True" WidthRequest="400" Margin="2" Padding="2">
-                                <Grid>
-                                    <StackLayout Padding="10">
-                                        <Label HorizontalOptions="Start" Style="{StaticResource HeaderLabelStyle}" 
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame HasShadow="True" WidthRequest="400" Margin="2" Padding="2">
+                                        <Grid>
+                                            <StackLayout Padding="10">
+                                                <Label HorizontalOptions="Start" Style="{StaticResource HeaderLabelStyle}" 
                                                Text="{Binding Name}" FontFamily="MuliBold" LineBreakMode="TailTruncation"/>
-                                        <Label HorizontalOptions="Start" Style="{StaticResource HeaderLabelStyle}"
+                                                <Label HorizontalOptions="Start" Style="{StaticResource HeaderLabelStyle}"
                                                Text="{Binding Time, StringFormat='{}{0:yyyy-MM-dd}'}"/>
-                                        <Label HorizontalOptions="Start" Style="{StaticResource HeaderLabelStyle}"
+                                                <Label HorizontalOptions="Start" Style="{StaticResource HeaderLabelStyle}"
                                                Text="{Binding Content}"/>
-                                    </StackLayout>
-                                </Grid>
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer NumberOfTapsRequired="1" CommandParameter="{Binding .}"
+                                            </StackLayout>
+                                        </Grid>
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer NumberOfTapsRequired="1" CommandParameter="{Binding .}"
                                                           Command="{Binding Path=BindingContext.SelectCollectionCommand, Source={x:Reference Name=self}}"/>
-                                </Frame.GestureRecognizers>
-                            </Frame>
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                </FlexLayout>
-            </RefreshView>
-        </StackLayout>
+                                        </Frame.GestureRecognizers>
+                                    </Frame>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </FlexLayout>
+                    </ScrollView>
+                </RefreshView>
+            </StackLayout>
+            <mdc:MaterialFloatingButton HorizontalOptions="End" VerticalOptions="End" Margin="20" Icon="plus"
+                                        Command="{Binding NewFormPopupCommand}"/>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

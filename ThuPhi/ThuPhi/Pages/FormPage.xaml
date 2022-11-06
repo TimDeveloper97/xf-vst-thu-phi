@@ -25,40 +25,26 @@
             <StackLayout>
                 <Grid BackgroundColor="{StaticResource AppColor}" HeightRequest="60">
                     <Label Style="{StaticResource IconLabel}" Text="{x:Static icon:FontIcons.ArrowLeft}"
-                       TextColor="White" HorizontalOptions="Start" VerticalOptions="Center" Margin="15,0"/>
+                           TextColor="White" HorizontalOptions="Start" VerticalOptions="Center" Margin="15,0">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" CommandParameter="{Binding .}"
+                                              Command="{Binding Path=BindingContext.BackCommand, Source={x:Reference Name=self}}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
 
                     <StackLayout HorizontalOptions="End" VerticalOptions="Center" Orientation="Horizontal">
                         <Label Style="{StaticResource IconLabel}" Text="{x:Static icon:FontIcons.Home}" 
-                           Margin="0,5" TextColor="White">
+                               Margin="10,5,15,5" TextColor="White">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer NumberOfTapsRequired="1" CommandParameter="{Binding .}"
                                               Command="{Binding Path=BindingContext.HomeCommand, Source={x:Reference Name=self}}"/>
                             </Label.GestureRecognizers>
                         </Label>
-                        <Label Style="{StaticResource IconLabel}" Text="{x:Static icon:FontIcons.Account}"
-                           Margin="10,5,15,5" TextColor="White"/>
                     </StackLayout>
                 </Grid>
-                <StackLayout Margin="0,10,0,5">
-                    <Grid>
-                        <!--<Label Style="{StaticResource IconLabel}" Text="{x:Static icon:FontIcons.PlusThick}"
-                           HorizontalOptions="Start" VerticalOptions="Center" Margin="15,5"/>-->
-
-                        <StackLayout HorizontalOptions="End" VerticalOptions="Center" Orientation="Horizontal">
-                            <!--<Label Style="{StaticResource IconLabel}" Text="{x:Static icon:FontIcons.Reload}" Margin="0,5">
-                                <Label.GestureRecognizers>
-                                    <TapGestureRecognizer NumberOfTapsRequired="1" CommandParameter="{Binding .}"
-                                                      Command="{Binding Path=BindingContext.LoadCollectionCommand, Source={x:Reference Name=self}}"/>
-                                </Label.GestureRecognizers>
-                            </Label>-->
-                            <Label Style="{StaticResource IconLabel}" Text="{x:Static icon:FontIcons.Filter}" Margin="10,5,15,5"/>
-                        </StackLayout>
-                    </Grid>
-                    <BoxView/>
-                </StackLayout>
 
                 <Label HorizontalOptions="Start" Style="{StaticResource TitleLabelStyle}" 
-                       FontFamily="MuliBold" LineBreakMode="TailTruncation" Margin="10,0">
+                       FontFamily="MuliBold" LineBreakMode="TailTruncation" Margin="20,5">
                     <Label.FormattedText>
                         <FormattedString>
                             <Span Text="{Binding Model.Name}"/>

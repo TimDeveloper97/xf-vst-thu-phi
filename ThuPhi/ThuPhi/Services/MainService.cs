@@ -12,7 +12,7 @@ namespace ThuPhi.Services
     {
         public async Task<List<Form>> InfoCollection(string token)
         {
-            var res = await Service<Form, string>.Posts(new BaseModel { Code = 0, Token = token, Url = Api.UpdateDotThu });
+            var res = await Service<Form, string>.Posts(new BaseModel { Token = token, Url = Api.UpdateDotThu, Value = new { Code = 0 } });
             return res;
         }
 

@@ -62,6 +62,8 @@ namespace ThuPhi.ViewModels
 
         public ICommand LoginCommand => new Command(async () =>
         {
+            IsBusy = true;
+
             if(string.IsNullOrEmpty(UserName))
             {
                 Message.ShortAlert("Username cann't be empty");
@@ -73,9 +75,22 @@ namespace ThuPhi.ViewModels
                 return;
             }
 
-            var res = await Service.Login(UserName, Password);
+            try
+            {
+                var res = await Service.Login(UserName, Password); 
 
-            await Shell.Current.GoToAsync($"//{nameof(HomePage)}?{nameof(HomeViewModel.ParameterToken)}={res.Token}");
+                if(res?.Token != null)
+                    await Shell.Current.GoToAsync($"//{nameof(HomePage)}?{nameof(HomeViewModel.ParameterToken)}={res.Token}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+
         });
 
         #endregion

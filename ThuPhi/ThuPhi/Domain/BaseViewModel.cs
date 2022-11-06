@@ -29,12 +29,12 @@ namespace ThuPhi.Domain
 
         protected IMainService Service = DependencyService.Get<IMainService>();
         protected IMessage Message = DependencyService.Get<IMessage>();
+        protected static string Token { get; set; }
 
         protected async Task TimeoutSession(string message)
         {
-            //await MaterialDialog.Instance.SnackbarAsync(message: message,
-            //                  msDuration: MaterialSnackbar.DurationLong);
-            //await Shell.Current.GoToAsync("//LoginPage");
+            Message.LongAlert(message);
+            await Shell.Current.GoToAsync("//LoginPage");
         }
         #endregion
     }

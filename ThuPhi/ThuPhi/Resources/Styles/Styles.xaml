@@ -428,13 +428,15 @@
     <x:Double x:Key="Title">20</x:Double>
     <x:Double x:Key="SubTitle">17</x:Double>
     <x:Double x:Key="MiniTitle">15</x:Double>
-    <x:Double x:Key="Header">30</x:Double>
+    <x:Double x:Key="Header">25</x:Double>
     <x:Double x:Key="CornerRadius">5</x:Double>
     <x:Double x:Key="Padding">10</x:Double>
     <x:Double x:Key="Margin">10</x:Double>
+    <x:Double x:Key="Icon">30</x:Double>
 
-        <Style x:Key="IconLabel" TargetType="Label">
-        <Setter Property="FontSize" Value="30" />
+    
+    <Style x:Key="IconLabel" TargetType="Label">
+        <Setter Property="FontSize" Value="{StaticResource Icon}" />
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
         <Setter Property="FontFamily" Value="MaterialIcons" />
         <Setter Property="Margin" Value="1,2,0,0"/>
@@ -543,6 +545,15 @@
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
         <Setter Property="FontSize" Value="{StaticResource MiniTitle}"/>
     </Style>
+    <Style TargetType="mdc:MaterialFloatingButton">
+        <Setter Property="BackgroundColor" Value="{StaticResource AppColor}"/>
+        <Setter Property="BorderColor" Value="{StaticResource AppColor}"/>
+        <Setter Property="Animation" Value="Scale"/>
+        <Setter Property="FontSize" Value="{StaticResource Icon}" />
+        <Setter Property="ShadowColor" Value="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray950}}"/>
+        <Setter Property="FontFamily" Value="MaterialIcons" />
+    </Style>
+    
     <!--#endregion-->
 
 </ResourceDictionary>

@@ -34,7 +34,9 @@ namespace ThuPhi.ViewModels
             OnLoad();
         });
 
+        public ICommand BackCommand => new Command(async () => await Shell.Current.GoToAsync($".."));
 
+        public ICommand HomeCommand => new Command(async () => await Shell.Current.Navigation.PopToRootAsync());
         #endregion
 
         public FormViewModel()

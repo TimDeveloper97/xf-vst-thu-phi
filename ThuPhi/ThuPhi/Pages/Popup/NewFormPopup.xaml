@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<xct:BasePopup xmlns="http://xamarin.com/schemas/2014/forms" 
+<xct:Popup xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              
              Shell.NavBarIsVisible="false"
@@ -7,32 +7,39 @@
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              xmlns:icon="clr-namespace:ThuPhi.Resources"
              xmlns:lang="clr-namespace:ThuPhi.Resources.Languages"
-             xmlns:vm="clr-namespace:ThuPhi.ViewModels"
-             Size="300,300"
-             xct:CornerRadiusEffect.CornerRadius="5"
+             xmlns:vm="clr-namespace:ThuPhi.ViewModels.Popup"
+             xmlns:m="clr-namespace:ThuPhi.Model.Send"
+             x:TypeArguments="m:FormCode"
+             xct:CornerRadiusEffect.CornerRadius="10"
+             Size="350,270"
              IsLightDismissEnabled="False"
            
              x:Class="ThuPhi.Pages.Popup.NewFormPopup">
-    <xct:BasePopup.Content>
+    <xct:Popup.Content>
         <Grid>
-            <Frame>
-                <StackLayout>
-                    <Grid BackgroundColor="{StaticResource AppColor}" HeightRequest="40">
-                        <Label Text="Cập nhật đợt thu phí" TextColor="White" FontSize="{StaticResource Title}"/>
+            <Frame HorizontalOptions="Fill" VerticalOptions="Center">
+                <StackLayout BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray950}}">
+                    <Grid BackgroundColor="{StaticResource AppColor}" HeightRequest="50">
+                        <Label Text="Cập nhật đợt thu phí" TextColor="White" 
+                               FontSize="{StaticResource Title}" Margin="{StaticResource Margin}"/>
                     </Grid>
-                    <Grid Margin="1,-6">
-                        <StackLayout Padding="{StaticResource Padding}">
-                            <Label Text="Đăng nhập" FontSize="{StaticResource Title}"/>
-                            <StackLayout Padding="10,0,10,10">
-                                <mdc:MaterialEntry LabelText="Tên người dùng *" Text="{Binding UserName}"/>
-                                <mdc:MaterialEntry LabelText="Mật khẩu *" IsPassword="True" Text="{Binding Password}"/>
-                                <mdc:MaterialSwitch Text="Giữ thông tin đăng nhập" IsToggled="{Binding IsSave}"/>
-                            </StackLayout>
+                    <Grid Margin="20,5" RowDefinitions="*,*" HeightRequest="170">
+                        <mdc:MaterialEntry LabelText="Tên gọi *" Text="{Binding UserName}"/>
+                        <Grid Grid.Row="1" ColumnDefinitions="*,*">
+                            <mdc:MaterialEntry Grid.Column="0" LabelText="Ký hiệu *" Text="{Binding UserName}"/>
+                            <mdc:MaterialEntry Grid.Column="1" LabelText="Mẫu nội dung *" Text="{Binding UserName}"/>
+                        </Grid>
+                    </Grid>
+                    
+                    <Grid Style="{StaticResource GroupGridStyle}" VerticalOptions="Center" Padding="0,10">
+                        <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
+                            <mdc:MaterialButton x:Name="okBtn" WidthRequest="100" Clicked="okBtn_Clicked" Text="OK"/>
+                            <mdc:MaterialButton x:Name="cancelBtn" WidthRequest="100" Clicked="cancelBtn_Clicked" Text="Cancel"/>
                         </StackLayout>
                     </Grid>
                 </StackLayout>
             </Frame>
         </Grid>
-    </xct:BasePopup.Content>
+    </xct:Popup.Content>
     
-</xct:BasePopup>
+</xct:Popup>

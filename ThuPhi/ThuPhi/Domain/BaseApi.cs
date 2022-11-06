@@ -40,9 +40,16 @@ namespace ThuPhi.Domain
                 {
                     var content = await response.Content.ReadAsStringAsync();
                     var jBaseModel = JsonConvert.DeserializeObject<BaseModel>(content);
-                    var jObj = JsonConvert.DeserializeObject<R>(jBaseModel.Value.ToString());
 
-                    return jObj;
+                    if (jBaseModel.Code != 0 || jBaseModel.Value == null)
+                    {
+                        DependencyService.Get<IMessage>().ShortAlert(jBaseModel.Message);
+                    }
+                    else
+                    {
+                        var jObj = JsonConvert.DeserializeObject<R>(jBaseModel.Value.ToString());
+                        return jObj;
+                    }
                 }
             }
             catch (Exception)
@@ -75,7 +82,7 @@ namespace ThuPhi.Domain
                     var content = await response.Content.ReadAsStringAsync();
                     var jBaseModel = JsonConvert.DeserializeObject<BaseModel>(content);
 
-                    if (jBaseModel.Code != 0)
+                    if (jBaseModel.Code != 0 || jBaseModel.Value == null)
                     {
                         DependencyService.Get<IMessage>().ShortAlert(jBaseModel.Message);
                     }
@@ -120,18 +127,18 @@ namespace ThuPhi.Domain
                     var content = await response.Content.ReadAsStringAsync();
                     var jBaseModel = JsonConvert.DeserializeObject<BaseModel>(content);
 
-                    if (jBaseModel.Code != 0)
+                    if (jBaseModel.Code != 0 || jBaseModel.Value == null)
                     {
                         DependencyService.Get<IMessage>().ShortAlert(jBaseModel.Message);
                     }
                     else
                     {
                         var jvalue = JsonConvert.SerializeObject(jBaseModel.Value);
-                        var dict = JsonConvert.DeserializeObject<Dictionary<string, string>>(jvalue);
+                        var dict = JsonConvert.DeserializeObject<Dictionary<string, object>>(jvalue);
                         var result = new List<R>();
                         foreach (var kv in dict)
                         {
-                            var r = JsonConvert.DeserializeObject<R>(kv.Value);
+                            var r = JsonConvert.DeserializeObject<R>(kv.Value.ToString());
                             result.Add(r);
                         }
 

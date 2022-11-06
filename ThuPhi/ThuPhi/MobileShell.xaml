@@ -5,6 +5,7 @@
              Shell.FlyoutBehavior="Disabled"
              Shell.TabBarIsVisible="False"
              Shell.TabBarBackgroundColor="{StaticResource AppColor}"
+             Shell.BackgroundColor="{StaticResource AppColor}"
              xmlns:page="clr-namespace:ThuPhi.Pages"
              
              x:Class="ThuPhi.MobileShell">
