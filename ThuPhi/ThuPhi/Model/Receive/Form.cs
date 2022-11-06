@@ -36,5 +36,11 @@ namespace ThuPhi.Model.Receive
 
         [JsonProperty("SoTT")]
         public string Order { get; set; }
+
+        [JsonProperty("No")]
+        public string Owe { get; set; }
+
+        [JsonProperty("SoTT")]
+        public string Pay { get; set; }
     }
 }

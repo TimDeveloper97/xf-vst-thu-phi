@@ -69,16 +69,6 @@ namespace ThuPhi.ViewModels
                 foreach (var item in res)
                 {
                     Collections.Add(item);
-                    Collections.Add(item);
-                    Collections.Add(item);
-                    Collections.Add(item);
-                    Collections.Add(item);
-                    Collections.Add(item);
-                    Collections.Add(item);
-                    Collections.Add(item);
-                    Collections.Add(item);
-                    Collections.Add(item);
-                    Collections.Add(item);
                 }
             }
             catch (Exception ex)

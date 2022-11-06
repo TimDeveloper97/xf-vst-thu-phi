@@ -48,11 +48,11 @@
                                         <Grid>
                                             <StackLayout Padding="10">
                                                 <Label HorizontalOptions="Start" Style="{StaticResource HeaderLabelStyle}" 
-                                               Text="{Binding Name}" FontFamily="MuliBold" LineBreakMode="TailTruncation"/>
+                                                       Text="{Binding Name}" FontFamily="MuliBold" LineBreakMode="TailTruncation"/>
                                                 <Label HorizontalOptions="Start" Style="{StaticResource HeaderLabelStyle}"
-                                               Text="{Binding Time, StringFormat='{}{0:yyyy-MM-dd}'}"/>
+                                                       Text="{Binding Time, StringFormat='{}{0:yyyy-MM-dd}'}"/>
                                                 <Label HorizontalOptions="Start" Style="{StaticResource HeaderLabelStyle}"
-                                               Text="{Binding Content}"/>
+                                                       Text="{Binding Content}"/>
                                             </StackLayout>
                                         </Grid>
                                         <Frame.GestureRecognizers>
