@@ -8,6 +8,8 @@ using System.Text.RegularExpressions;
 using System.Windows.Input;
 using ThuPhi.Domain;
 using ThuPhi.Model.Receive;
+using ThuPhi.Pages.Popup;
+using Xamarin.CommunityToolkit.Extensions;
 using Xamarin.Forms;
 
 namespace ThuPhi.ViewModels
@@ -18,7 +20,8 @@ namespace ThuPhi.ViewModels
         #region Property
         private Form model;
         private string parameterForm;
-        private ObservableCollection<Info> users;
+        private ObservableCollection<Info> usersPay, usersNotPay, users;
+        private string payCount, notPayCount, sumPay;
 
         public string ParameterForm
         {
@@ -32,13 +35,32 @@ namespace ThuPhi.ViewModels
             }
         }
         public Form Model { get => model; set => SetProperty(ref model, value); }
-        public ObservableCollection<Info> Users { get => users; set => SetProperty(ref users, value); }
+        public ObservableCollection<Info> UsersPay { get => usersPay; set => SetProperty(ref usersPay, value); }
+        public ObservableCollection<Info> UsersNotPay { get => usersNotPay; set => SetProperty(ref usersNotPay, value); }
+
+        public string PayCount { get => payCount; set => SetProperty(ref payCount, value); }
+        public string NotPayCount { get => notPayCount; set => SetProperty(ref notPayCount, value); }
+        public string SumPay { get => sumPay; set => SetProperty(ref sumPay, value); }
         #endregion
 
         #region Command 
         public ICommand PageAppearingCommand => new Command(() =>
         {
 
+        });
+
+        public ICommand LongPressUserCommand => new Command<Info>(async (obj) =>
+        {
+            var x = await Shell.Current.ShowPopupAsync(new UserPopup(obj));
+        });
+
+        public ICommand SaveCommand => new Command<Info>(async (obj) =>
+        {
+        });
+
+        public ICommand NewUserCommand => new Command(async () =>
+        {
+            var x = await Shell.Current.ShowPopupAsync(new UserPopup(null));
         });
 
         public ICommand BackCommand => new Command(async () => await Shell.Current.GoToAsync($".."));
@@ -51,14 +73,15 @@ namespace ThuPhi.ViewModels
 
             try
             {
+                #region Get data
                 var res = await Service.FindCollection(Token, Model.Id);
                 if (res == null) return;
 
                 res.Items = res.Items.OrderBy(x => x.Name).ToList();
-                Users?.Clear();
+                users?.Clear();
                 foreach (var item in res.Items)
                 {
-                    Users.Add(item);
+                    users.Add(item);
                 }
 
                 var msgs = Sms.GetByContentAndDateTime(res.Content, res.Time);
@@ -67,14 +90,34 @@ namespace ThuPhi.ViewModels
                     var obj = AnalysisSms(item.Content, res.Content);
                     //var obj = Split(item.Content, res.Content);
 
-                    var user = Users.FirstOrDefault(x => x.Id == obj.Name);
+                    var user = users.FirstOrDefault(x => x.Id == obj.Name);
                     if (user != null)
                     {
                         user.Pay = obj.Pay;
                         user.Time = UnixTimeToDateTime(long.Parse(item.LongTime));
                     }
                 }
+                #endregion
 
+                #region Update view
+                UsersPay?.Clear();
+                UsersNotPay?.Clear();
+                SumPay = "0";
+
+                foreach (var item in users)
+                {
+                    if (string.IsNullOrEmpty(item.Pay) || int.Parse(item.Pay) == 0)
+                        UsersNotPay.Add(item);
+                    else
+                    {
+                        UsersPay.Add(item);
+                        SumPay = (long.Parse(item.Pay) + long.Parse(SumPay)).ToString();
+                    }    
+                }
+
+                PayCount = UsersPay.Count.ToString();
+                NotPayCount = UsersNotPay.Count.ToString();
+                #endregion
             }
             catch (Exception ex)
             {
@@ -96,7 +139,9 @@ namespace ThuPhi.ViewModels
         void Init()
         {
             Title = "Form";
-            Users = new ObservableCollection<Info>();
+            UsersPay = new ObservableCollection<Info>();
+            UsersNotPay = new ObservableCollection<Info>();
+            users = new ObservableCollection<Info>();
         }
 
         Template AnalysisSms(string body, string content)
@@ -108,7 +153,7 @@ namespace ThuPhi.ViewModels
             var bodyWO = new Regex(regexSpace).Replace(body, " ");
             var money = new Regex(regexMoney).Match(bodyWO).Value;
             var name = new Regex(regexName).Match(bodyWO).Value;
-            return new Template { Pay = money, Name = name };
+            return new Template { Pay = money.Replace(",", ""), Name = name };
         }
 
         DateTime UnixTimeToDateTime(long unixtime)

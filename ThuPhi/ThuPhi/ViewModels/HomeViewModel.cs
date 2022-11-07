@@ -41,10 +41,7 @@ namespace ThuPhi.ViewModels
         #endregion
 
         #region Command 
-        public ICommand PageAppearingCommand => new Command(() =>
-        {
-            OnLoad();
-        });
+        public ICommand PageAppearingCommand => new Command(() => OnLoad());
 
         public ICommand LogoutCommand => new Command(async () => await Shell.Current.GoToAsync("//LoginPage"));
 

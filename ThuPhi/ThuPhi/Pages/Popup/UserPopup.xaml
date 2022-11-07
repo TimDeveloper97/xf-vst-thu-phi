@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xct:Popup xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             
+             Shell.NavBarIsVisible="false"
+             xmlns:mdc="clr-namespace:Plugin.MaterialDesignControls;assembly=Plugin.MaterialDesignControls"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:icon="clr-namespace:ThuPhi.Resources"
+             xmlns:lang="clr-namespace:ThuPhi.Resources.Languages"
+             xmlns:m="clr-namespace:ThuPhi.Model.Receive"
+             x:TypeArguments="m:Info"
+             Size="350,270"
+             IsLightDismissEnabled="False"
+             
+             x:Class="ThuPhi.Pages.Popup.UserPopup">
+    <xct:Popup.Resources>
+        <Style TargetType="StackLayout">
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"/>
+        </Style>
+    </xct:Popup.Resources>
+    
+    <xct:Popup.Content>
+        <Grid>
+            <Frame HorizontalOptions="Fill" VerticalOptions="Center" CornerRadius="0">
+                <StackLayout>
+                    <Grid BackgroundColor="{StaticResource AppColor}" HeightRequest="50">
+                        <Label x:Name="title" TextColor="White" 
+                               FontSize="{StaticResource Title}" Margin="{StaticResource Margin}"/>
+                    </Grid>
+                    <Grid Margin="20,-5,20,5" RowDefinitions="*,*" HeightRequest="170">
+                        <mdc:MaterialEntry x:Name="name" LabelText="Họ và Tên *"/>
+                        <Grid Grid.Row="1" ColumnDefinitions="*,*">
+                            <mdc:MaterialEntry x:Name="stk" Grid.Column="0" LabelText="Số TK"/>
+                            <mdc:MaterialEntry x:Name="pay" Grid.Column="1" LabelText="Số tiền nộp"/>
+                        </Grid>
+                    </Grid>
+
+                    <Grid Style="{StaticResource GroupGridStyle}" VerticalOptions="Center" Margin="0,10,0,0" Padding="0,10">
+                        <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
+                            <mdc:MaterialButton x:Name="deleteBtn" WidthRequest="100" Clicked="deleteBtn_Clicked" Text="Delete"/>
+                            <mdc:MaterialButton x:Name="okBtn" WidthRequest="100" Clicked="okBtn_Clicked" Text="OK"/>
+                            <mdc:MaterialButton x:Name="cancelBtn" Style="{StaticResource HideButtonStyle}" WidthRequest="100" Clicked="cancelBtn_Clicked" Text="Cancel"/>
+                        </StackLayout>
+                    </Grid>
+                </StackLayout>
+            </Frame>
+        </Grid>
+    </xct:Popup.Content>
+</xct:Popup>

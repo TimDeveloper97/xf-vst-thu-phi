@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ThuPhi.Domain
 {
-    class BaseBinding : INotifyPropertyChanged
+    public class BaseBinding : INotifyPropertyChanged
     {
         //public string Id { get; set; }
 

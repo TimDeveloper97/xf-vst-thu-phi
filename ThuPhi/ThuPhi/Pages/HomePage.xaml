@@ -68,6 +68,7 @@
             </StackLayout>
             <mdc:MaterialFloatingButton HorizontalOptions="End" VerticalOptions="End" Margin="20" Icon="plus"
                                         Command="{Binding NewFormPopupCommand}"/>
+            
             <ActivityIndicator IsRunning="{Binding IsLoading}"/>
         </Grid>
     </ContentPage.Content>

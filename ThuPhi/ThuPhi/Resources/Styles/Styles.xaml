@@ -9,6 +9,7 @@
     <converter:MoneyConverter x:Key="StringToMoney" />
     <converter:DatetimeConverter x:Key="StringToDateTime" />
     <converter:CharacterConverter x:Key="StringToCharacter" />
+    <converter:CountConverter x:Key="PayToNumber" />
     
     <!--#endregion-->
 
@@ -528,6 +529,15 @@
         <Setter Property="CornerRadius" Value="0"/>
         <Setter Property="BusyColor" Value="{StaticResource AppColor}"/>
     </Style>
+    <Style x:Key="HideButtonStyle" TargetType="mdc:MaterialButton">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+        <Setter Property="FontSize" Value="{StaticResource SubTitle}"/>
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray900}}"/>
+        <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray900}}"/>
+        <Setter Property="CornerRadius" Value="0"/>
+        <Setter Property="BusyColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
+    </Style>
+    
     <Style TargetType="mdc:MaterialEntry">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
         <Setter Property="FontSize" Value="{StaticResource SubTitle}"/>
@@ -578,7 +588,7 @@
         <Setter Property="BadgeBackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray900}}" />
     </Style>
     <Style TargetType="xct:TabView">
-        <Setter Property="TabIndicatorColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+        <Setter Property="TabIndicatorColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource Gray100}}" />
         <Setter Property="Margin" Value="0,0,0,5" />
         <Setter Property="TabIndicatorWidth" Value="100" />
     </Style>

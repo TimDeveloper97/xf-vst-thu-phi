@@ -27,7 +27,7 @@ namespace ThuPhi.Model.Receive
         public List<Info> Items { get; set; }
     }
 
-    class Info : BaseBinding
+    public class Info : BaseBinding
     {
         [JsonProperty("_id")]
         public string Id { get; set; }
