@@ -58,7 +58,7 @@
 
             <Grid Grid.Row="1">
                 <xct:TabView TabStripPlacement="Bottom" SelectedIndex="0">
-                    <xct:TabViewItem Text="Đã nộp" >
+                    <xct:TabViewItem Text="Đã nộp">
                         <Grid>
                             <RefreshView Command="{Binding LoadUserCommand}" IsRefreshing="{Binding IsBusy}"
                                          RefreshColor="{StaticResource AppColor}" Margin="5,0,0,0">

@@ -26,6 +26,8 @@ namespace ThuPhi.ViewModels
             {
                 parameterForm = Uri.UnescapeDataString(value ?? string.Empty);
                 SetProperty(ref parameterForm, value);
+                Model = JsonConvert.DeserializeObject<Form>(ParameterForm);
+
                 IsBusy = true;
             }
         }
@@ -36,6 +38,7 @@ namespace ThuPhi.ViewModels
         #region Command 
         public ICommand PageAppearingCommand => new Command(() =>
         {
+
         });
 
         public ICommand BackCommand => new Command(async () => await Shell.Current.GoToAsync($".."));
@@ -45,7 +48,6 @@ namespace ThuPhi.ViewModels
         public ICommand LoadUserCommand => new Command(async () =>
         {
             IsBusy = true;
-            OnLoad();
 
             try
             {
@@ -62,16 +64,17 @@ namespace ThuPhi.ViewModels
                 var msgs = Sms.GetByContentAndDateTime(res.Content, res.Time);
                 foreach (var item in msgs)
                 {
-                    var obj = AnalysisSms(item.Content);
+                    var obj = AnalysisSms(item.Content, res.Content);
+                    //var obj = Split(item.Content, res.Content);
 
                     var user = Users.FirstOrDefault(x => x.Id == obj.Name);
-                    if(user != null)
+                    if (user != null)
                     {
                         user.Pay = obj.Pay;
                         user.Time = UnixTimeToDateTime(long.Parse(item.LongTime));
-                    }    
+                    }
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -96,16 +99,11 @@ namespace ThuPhi.ViewModels
             Users = new ObservableCollection<Info>();
         }
 
-        void OnLoad()
-        {
-            Model = JsonConvert.DeserializeObject<Form>(ParameterForm);
-        }
-
-        Template AnalysisSms(string body)
+        Template AnalysisSms(string body, string content)
         {
             var regexSpace = @"\s+";
             var regexMoney = @"(?<=(\+))(.*?)(?=VND)";
-            var regexName = @"(?<=(CDP20223 ))(.*?)(?= )";
+            var regexName = $"(?<=({content} ))(.*?)(?= )";
 
             var bodyWO = new Regex(regexSpace).Replace(body, " ");
             var money = new Regex(regexMoney).Match(bodyWO).Value;
@@ -113,10 +111,39 @@ namespace ThuPhi.ViewModels
             return new Template { Pay = money, Name = name };
         }
 
-        public DateTime UnixTimeToDateTime(long unixtime)
+        DateTime UnixTimeToDateTime(long unixtime)
         {
             var dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
             return dtDateTime.AddMilliseconds(unixtime).ToLocalTime();
+        }
+
+        Template Split(string input, string content)
+        {
+            var numberPos = input.IndexOf('+') + 1;
+            if (numberPos == 0) return null;
+
+            var contentPos = input.IndexOf(content, numberPos);
+            if (contentPos < 0) return null;
+
+            long a = 0;
+            for (int i = numberPos; i < input.Length; i++)
+            {
+                char c = input[i];
+                if (i == ',' || c == '.') continue;
+                if (!char.IsDigit(c)) break;
+
+                a = (a << 1) + (a << 3) + (c & 15);
+            }
+
+            var namePos = contentPos + content.Length;
+            var s = "";
+
+            for (int i = namePos; i < input.Length; i++)
+            {
+                char c = input[i];
+                if (c != ' ') s += c;
+            }
+            return new Template { Name = s.ToUpper(), Pay = a.ToString() };
         }
 
         class Template

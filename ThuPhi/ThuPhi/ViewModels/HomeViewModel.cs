@@ -20,6 +20,8 @@ namespace ThuPhi.ViewModels
         #region Property
         private ObservableCollection<Form> collections;
         private string parameterToken;
+        private bool isLoading;
+
         public string ParameterToken
         {
             get => parameterToken; set
@@ -34,6 +36,8 @@ namespace ThuPhi.ViewModels
         }
 
         public ObservableCollection<Form> Collections { get => collections; set => SetProperty(ref collections, value); }
+        public bool IsLoading { get => isLoading; set => SetProperty(ref isLoading, value); }
+
         #endregion
 
         #region Command 
@@ -42,6 +46,8 @@ namespace ThuPhi.ViewModels
             OnLoad();
         });
 
+        public ICommand LogoutCommand => new Command(async () => await Shell.Current.GoToAsync("//LoginPage"));
+
         public ICommand NewFormPopupCommand => new Command(async () =>
         {
             var x = await Shell.Current.ShowPopupAsync(new NewFormPopup(new FormCode()));
@@ -49,10 +55,19 @@ namespace ThuPhi.ViewModels
 
         public ICommand SelectCollectionCommand => new Command<Form>(async (obj) =>
         {
-            obj.Time = new DateTime(obj.Time.Year, obj.Time.Month, obj.Time.Day);
-            var json = JsonConvert.SerializeObject(obj);
+            try
+            {
+                IsLoading = true;
+                obj.Time = new DateTime(obj.Time.Year, obj.Time.Month, obj.Time.Day);
+                var json = JsonConvert.SerializeObject(obj);
 
-            await Shell.Current.GoToAsync($"{nameof(FormPage)}?{nameof(FormViewModel.ParameterForm)}={json}");
+                await Shell.Current.GoToAsync($"{nameof(FormPage)}?{nameof(FormViewModel.ParameterForm)}={json}");
+            }
+            catch (Exception) { }
+            finally
+            {
+                IsLoading = false;
+            }
         });
 
         public ICommand LoadCollectionCommand => new Command(async () =>
@@ -80,6 +95,7 @@ namespace ThuPhi.ViewModels
                 IsBusy = false;
             }
         });
+
         #endregion
 
         public HomeViewModel()
@@ -91,6 +107,7 @@ namespace ThuPhi.ViewModels
         void Init()
         {
             Title = "Home";
+            IsLoading = false;
             Collections = new ObservableCollection<Form>();
         }
 
