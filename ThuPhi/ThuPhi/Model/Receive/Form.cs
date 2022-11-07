@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using ThuPhi.Domain;
 
 namespace ThuPhi.Model.Receive
 {
@@ -13,12 +14,6 @@ namespace ThuPhi.Model.Receive
         [JsonProperty("NoiDung")]
         public string Content { get; set; }
 
-        //[JsonProperty("Mau")]
-        //public string Pattern { get; set; }
-
-        //[JsonProperty("items")]
-        //public List<Info> Items { get; set; }
-
         [JsonProperty("ThoiGian")]
         public DateTime Time { get; set; }
 
@@ -26,8 +21,17 @@ namespace ThuPhi.Model.Receive
         public string Id { get; set; }
     }
 
-    class Info
+    class DetailForm : Form
     {
+        [JsonProperty("items")]
+        public List<Info> Items { get; set; }
+    }
+
+    class Info : BaseBinding
+    {
+        [JsonProperty("_id")]
+        public string Id { get; set; }
+
         [JsonProperty("HoTen")]
         public string Name { get; set; }
 
@@ -38,9 +42,16 @@ namespace ThuPhi.Model.Receive
         public string Order { get; set; }
 
         [JsonProperty("No")]
-        public string Owe { get; set; }
+        private string owe;
 
-        [JsonProperty("SoTT")]
-        public string Pay { get; set; }
+        [JsonProperty("Tra")]
+        private string pay;
+
+        [JsonProperty("ThoiGian")]
+        private DateTime? time;
+
+        public DateTime? Time { get => time; set => SetProperty(ref time, value); }
+        public string Owe { get => owe; set => SetProperty(ref owe, value); }
+        public string Pay { get => pay; set => SetProperty(ref pay, value); }
     }
 }

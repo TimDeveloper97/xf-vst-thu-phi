@@ -23,7 +23,7 @@
 
     <ContentPage.Resources>
         <Style TargetType="StackLayout">
-            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray950}}"/>
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"/>
         </Style>
     </ContentPage.Resources>
 
@@ -50,7 +50,7 @@
                                                 <Label HorizontalOptions="Start" Style="{StaticResource HeaderLabelStyle}" 
                                                        Text="{Binding Name}" FontFamily="MuliBold" LineBreakMode="TailTruncation"/>
                                                 <Label HorizontalOptions="Start" Style="{StaticResource HeaderLabelStyle}"
-                                                       Text="{Binding Time, StringFormat='{}{0:yyyy-MM-dd}'}"/>
+                                                       Text="{Binding Time, StringFormat='{}{0:yyyy/MM/dd}'}"/>
                                                 <Label HorizontalOptions="Start" Style="{StaticResource HeaderLabelStyle}"
                                                        Text="{Binding Content}"/>
                                             </StackLayout>

@@ -7,23 +7,26 @@
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              xmlns:icon="clr-namespace:ThuPhi.Resources"
              xmlns:lang="clr-namespace:ThuPhi.Resources.Languages"
-             xmlns:vm="clr-namespace:ThuPhi.ViewModels.Popup"
              xmlns:m="clr-namespace:ThuPhi.Model.Send"
              x:TypeArguments="m:FormCode"
-             xct:CornerRadiusEffect.CornerRadius="10"
              Size="350,270"
              IsLightDismissEnabled="False"
            
              x:Class="ThuPhi.Pages.Popup.NewFormPopup">
+    <xct:Popup.Resources>
+        <Style TargetType="StackLayout">
+            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"/>
+        </Style>
+    </xct:Popup.Resources>
     <xct:Popup.Content>
         <Grid>
-            <Frame HorizontalOptions="Fill" VerticalOptions="Center">
-                <StackLayout BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray950}}">
+            <Frame HorizontalOptions="Fill" VerticalOptions="Center" CornerRadius="0">
+                <StackLayout>
                     <Grid BackgroundColor="{StaticResource AppColor}" HeightRequest="50">
                         <Label Text="Cập nhật đợt thu phí" TextColor="White" 
                                FontSize="{StaticResource Title}" Margin="{StaticResource Margin}"/>
                     </Grid>
-                    <Grid Margin="20,5" RowDefinitions="*,*" HeightRequest="170">
+                    <Grid Margin="20,-5,20,5" RowDefinitions="*,*" HeightRequest="170">
                         <mdc:MaterialEntry LabelText="Tên gọi *" Text="{Binding UserName}"/>
                         <Grid Grid.Row="1" ColumnDefinitions="*,*">
                             <mdc:MaterialEntry Grid.Column="0" LabelText="Ký hiệu *" Text="{Binding UserName}"/>
@@ -31,7 +34,7 @@
                         </Grid>
                     </Grid>
                     
-                    <Grid Style="{StaticResource GroupGridStyle}" VerticalOptions="Center" Padding="0,10">
+                    <Grid Style="{StaticResource GroupGridStyle}" VerticalOptions="Center" Margin="0,10,0,0" Padding="0,10">
                         <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
                             <mdc:MaterialButton x:Name="okBtn" WidthRequest="100" Clicked="okBtn_Clicked" Text="OK"/>
                             <mdc:MaterialButton x:Name="cancelBtn" WidthRequest="100" Clicked="cancelBtn_Clicked" Text="Cancel"/>

@@ -2,13 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              
-             Shell.NavBarIsVisible="false"
+             Shell.NavBarIsVisible="False"
              xmlns:mdc="clr-namespace:Plugin.MaterialDesignControls;assembly=Plugin.MaterialDesignControls"
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              xmlns:icon="clr-namespace:ThuPhi.Resources"
              xmlns:lang="clr-namespace:ThuPhi.Resources.Languages"
              xmlns:vm="clr-namespace:ThuPhi.ViewModels"
              x:Name="self"
+             Title="{Binding Model.Name}"
              
              x:Class="ThuPhi.Pages.FormPage">
     <ContentPage.BindingContext>
@@ -19,142 +20,29 @@
                 EventName="Appearing"
                 Command="{Binding PageAppearingCommand}" />
     </ContentPage.Behaviors>
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <Style x:Key="CustomTabViewItemStyle" TargetType="xct:TabViewItem">
-                <Setter Property="TextColor" Value="White" />
-                <Setter Property="TextColorSelected" Value="Yellow" />
-                <Setter Property="TabWidth" Value="100" />
-            </Style>
-        </ResourceDictionary>
-    </ContentPage.Resources>
+    
     <ContentPage.Content>
-        <Grid>
-            <Grid>
-                <xct:TabView 
-                TabStripPlacement="Bottom"
-                TabIndicatorColor="White"
-                TabStripBackgroundColor="Red"
-                TabStripHeight="60">
-                    <xct:TabViewItem
-                    Icon="circle.png"
-                    Text="Tab 1"  
-                    Style="{StaticResource CustomTabViewItemStyle}">
-                        <Grid 
-                        BackgroundColor="LawnGreen">
-                            <Label
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center"
-                            Text="TabContent1" />
-                        </Grid>
-                    </xct:TabViewItem>
-                    <xct:TabViewItem
-                    Icon="square.png"
-                    Text="Tab 2"
-                    Style="{StaticResource CustomTabViewItemStyle}">
-                        <Grid
-                        BackgroundColor="LightCoral">
-                            <Label    
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center"
-                            Text="TabContent2" />
-                        </Grid>
-                    </xct:TabViewItem>
-                    <xct:TabViewItem
-                    Icon="triangle.png"
-                    Text="Tab 3"
-                    Style="{StaticResource CustomTabViewItemStyle}">
-                        <Grid
-                        BackgroundColor="LightPink">
-                            <Label    
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center"
-                            Text="TabContent3" />
-                        </Grid>
-                    </xct:TabViewItem>
-                    <xct:TabViewItem
-                    Icon="circle.png"
-                    Text="Tab 4"   
-                    Style="{StaticResource CustomTabViewItemStyle}">
-                        <Grid
-                        BackgroundColor="LightSeaGreen">
-                            <Label    
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center"
-                            Text="TabContent4" />
-                        </Grid>
-                    </xct:TabViewItem>
-                    <xct:TabViewItem
-                    Icon="square.png"
-                    Text="Tab 5"   
-                    Style="{StaticResource CustomTabViewItemStyle}">
-                        <Grid
-                        BackgroundColor="LightYellow">
-                            <Label    
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center"
-                            Text="TabContent5" />
-                        </Grid>
-                    </xct:TabViewItem>
-                    <xct:TabViewItem
-                    Icon="triangle.png"
-                    Text="Tab 6"
-                    Style="{StaticResource CustomTabViewItemStyle}">
-                        <Grid
-                        BackgroundColor="LimeGreen">
-                            <Label    
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center"
-                            Text="TabContent6" />
-                        </Grid>
-                    </xct:TabViewItem>
-                    <xct:TabViewItem
-                    Icon="circle.png"
-                    Text="Tab 7"   
-                    Style="{StaticResource CustomTabViewItemStyle}">
-                        <Grid
-                        BackgroundColor="LightSeaGreen">
-                            <Label    
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center"
-                            Text="TabContent7" />
-                        </Grid>
-                    </xct:TabViewItem>
-                    <xct:TabViewItem
-                    Icon="square.png"
-                    Text="Tab 8"   
-                    Style="{StaticResource CustomTabViewItemStyle}">
-                        <Grid
-                        BackgroundColor="LightYellow">
-                            <Label    
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center"
-                            Text="TabContent8" />
-                        </Grid>
-                    </xct:TabViewItem>
-                    <xct:TabViewItem
-                    Icon="triangle.png"
-                    Text="Tab 9"
-                    Style="{StaticResource CustomTabViewItemStyle}">
-                        <Grid
-                        BackgroundColor="LimeGreen">
-                            <Label    
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center"
-                            Text="TabContent9" />
-                        </Grid>
-                    </xct:TabViewItem>
-                </xct:TabView>
-            </Grid>
-            <!--<StackLayout>
+        <Grid RowDefinitions="60, *">
+            <StackLayout>
                 <Grid BackgroundColor="{StaticResource AppColor}" HeightRequest="60">
-                    <Label Style="{StaticResource IconLabel}" Text="{x:Static icon:FontIcons.ArrowLeft}"
-                           TextColor="White" HorizontalOptions="Start" VerticalOptions="Center" Margin="15,0">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer NumberOfTapsRequired="1" CommandParameter="{Binding .}"
+
+                    <StackLayout HorizontalOptions="Start" VerticalOptions="Center" Orientation="Horizontal">
+                        <Label Style="{StaticResource IconLabel}" Text="{x:Static icon:FontIcons.ArrowLeft}"
+                               TextColor="White" Margin="15,0,0,0">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" CommandParameter="{Binding .}"
                                               Command="{Binding Path=BindingContext.BackCommand, Source={x:Reference Name=self}}"/>
-                        </Label.GestureRecognizers>
-                    </Label>
+                            </Label.GestureRecognizers>
+                        </Label>
+
+                        <Label Style="{StaticResource SubHeaderLabelStyle}" Text="{Binding Model.Name}"
+                               TextColor="White" Margin="5,0" VerticalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" CommandParameter="{Binding .}"
+                                              Command="{Binding Path=BindingContext.BackCommand, Source={x:Reference Name=self}}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
 
                     <StackLayout HorizontalOptions="End" VerticalOptions="Center" Orientation="Horizontal">
                         <Label Style="{StaticResource IconLabel}" Text="{x:Static icon:FontIcons.Home}" 
@@ -166,48 +54,70 @@
                         </Label>
                     </StackLayout>
                 </Grid>
+            </StackLayout>
 
-                <Label HorizontalOptions="Start" Style="{StaticResource TitleLabelStyle}" 
-                       FontFamily="MuliBold" LineBreakMode="TailTruncation" Margin="20,5">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Text="{Binding Model.Name}"/>
-                            <Span Text="{Binding Model.Time, StringFormat='{} ({0:yyyy-MM-dd})'}"/>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
-                
-                <RefreshView Command="{Binding LoadUserCommand}" IsRefreshing="{Binding IsBusy}"
-                             RefreshColor="{StaticResource AppColor}" Margin="10,0">
-                    <ScrollView Margin="0,10,0,0" Padding="0,0,0,30">
-                        <FlexLayout Direction="Row" Wrap="Wrap" AlignContent="Start" AlignItems="Start"
-                                    JustifyContent="SpaceAround" BindableLayout.ItemsSource="{Binding Users}">
+            <Grid Grid.Row="1">
+                <xct:TabView TabStripPlacement="Bottom" SelectedIndex="0">
+                    <xct:TabViewItem Text="Đã nộp" >
+                        <Grid>
+                            <RefreshView Command="{Binding LoadUserCommand}" IsRefreshing="{Binding IsBusy}"
+                                         RefreshColor="{StaticResource AppColor}" Margin="5,0,0,0">
+                                <ScrollView Padding="0,0,0,10">
+                                    <FlexLayout Direction="Row" Wrap="Wrap" AlignContent="Start" AlignItems="Start"
+                                                JustifyContent="SpaceAround" BindableLayout.ItemsSource="{Binding Users}">
 
-                            <BindableLayout.ItemTemplate>
-                                <DataTemplate>
-                                    <Frame WidthRequest="400" Margin="2" Padding="0,2">
-                                        <Grid ColumnDefinitions="50, *">
-                                            <Frame CornerRadius="30" WidthRequest="50" HeightRequest="50">
-                                                <Label Text="Đ" Style="{StaticResource HeaderLabelStyle}" VerticalOptions="Center"/>
-                                            </Frame>
-                                            <Grid Grid.Column="1" Margin="10,0" RowDefinitions="6*,4*">
-                                                <Label Text="{Binding Name}" Style="{StaticResource TitleLabelStyle}"
-                                                       VerticalOptions="End" HorizontalOptions="Start"/>
-                                                <Label Grid.Row="1" Text="{Binding Pay}" Style="{StaticResource MiniLabelStyle}" 
-                                                       VerticalOptions="Start" HorizontalOptions="Start" Margin="0,-5,0,0"/>
-                                            </Grid>
-                                        </Grid>
-                                        <Frame.GestureRecognizers>
-                                            <TapGestureRecognizer NumberOfTapsRequired="1" CommandParameter="{Binding .}"
-                                                          Command="{Binding Path=BindingContext.SelectCollectionCommand, Source={x:Reference Name=self}}"/>
-                                        </Frame.GestureRecognizers>
-                                    </Frame>
-                                </DataTemplate>
-                            </BindableLayout.ItemTemplate>
-                        </FlexLayout>
-                    </ScrollView>
-                </RefreshView>
-            </StackLayout>-->
+                                        <BindableLayout.ItemTemplate>
+                                            <DataTemplate>
+                                                <Frame WidthRequest="400" Margin="2">
+                                                    <Grid RowDefinitions="*,1" VerticalOptions="Center">
+                                                        <Grid ColumnDefinitions="50, *, 70" VerticalOptions="Center">
+                                                            <Frame CornerRadius="30" HorizontalOptions="Center" VerticalOptions="Center"
+                                                               WidthRequest="40" HeightRequest="40">
+                                                                <Label Text="{Binding Name, Converter={StaticResource StringToCharacter}}"
+                                                                       Style="{StaticResource HeaderLabelStyle}" VerticalOptions="Center"/>
+                                                            </Frame>
+                                                            <Grid Grid.Column="1" RowDefinitions="6*,4*">
+                                                                <Label Text="{Binding Name}" Style="{StaticResource TitleLabelStyle}"
+                                                                       VerticalOptions="End" HorizontalOptions="Start"/>
+                                                                <Label Grid.Row="1" Text="{Binding Pay, Converter={StaticResource StringToMoney}, TargetNullValue='waiting...'}" 
+                                                                       Style="{StaticResource MiniLabelStyle}" VerticalOptions="Start" HorizontalOptions="Start" Margin="0,-5,0,0"/>
+                                                            </Grid>
+                                                            <Grid Grid.Column="2" VerticalOptions="Center">
+                                                                <Label Style="{StaticResource MiniLabelStyle}">
+                                                                    <Label.FormattedText>
+                                                                        <FormattedString>
+                                                                            <Span Text="{Binding Time, TargetNullValue='N/A', StringFormat='{} {0:h:mm tt}'}"/>
+                                                                            <Span Text="{Binding Time, TargetNullValue='', StringFormat='{} ({0:dd/MM/yyyy})'}"/>
+                                                                        </FormattedString>
+                                                                    </Label.FormattedText>
+                                                                </Label>
+                                                            </Grid>
+                                                        </Grid>
+                                                        <BoxView Grid.Row="1"/>
+                                                    </Grid>
+                                                    <Frame.GestureRecognizers>
+                                                        <TapGestureRecognizer NumberOfTapsRequired="1" CommandParameter="{Binding .}"
+                                                                              Command="{Binding Path=BindingContext.SelectCollectionCommand, Source={x:Reference Name=self}}"/>
+                                                    </Frame.GestureRecognizers>
+                                                </Frame>
+                                            </DataTemplate>
+                                        </BindableLayout.ItemTemplate>
+                                    </FlexLayout>
+                                </ScrollView>
+                            </RefreshView>
+                        </Grid>
+                    </xct:TabViewItem>
+                    <xct:TabViewItem Text="Cần nộp" BadgeText="14">
+                        <Grid>
+                            <Label    
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Text="TabContent2" />
+                        </Grid>
+                    </xct:TabViewItem>
+
+                </xct:TabView>
+            </Grid>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

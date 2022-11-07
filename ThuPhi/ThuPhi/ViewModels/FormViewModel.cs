@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Input;
 using ThuPhi.Domain;
 using ThuPhi.Model.Receive;
@@ -34,7 +36,6 @@ namespace ThuPhi.ViewModels
         #region Command 
         public ICommand PageAppearingCommand => new Command(() =>
         {
-            OnLoad();
         });
 
         public ICommand BackCommand => new Command(async () => await Shell.Current.GoToAsync($".."));
@@ -44,21 +45,33 @@ namespace ThuPhi.ViewModels
         public ICommand LoadUserCommand => new Command(async () =>
         {
             IsBusy = true;
+            OnLoad();
 
             try
             {
-                //var res = await Service.InfoCollection(Token);
-                //if (res == null) return;
+                var res = await Service.FindCollection(Token, Model.Id);
+                if (res == null) return;
 
+                res.Items = res.Items.OrderBy(x => x.Name).ToList();
                 Users?.Clear();
-                for (int i = 0; i < 5; i++)
+                foreach (var item in res.Items)
                 {
-                    Users.Add(new Info
-                    {
-                        Name = "Đinh Duy Anh",
-                        Pay = "1000000000",
-                    });
+                    Users.Add(item);
                 }
+
+                var msgs = Sms.GetByContentAndDateTime(res.Content, res.Time);
+                foreach (var item in msgs)
+                {
+                    var obj = AnalysisSms(item.Content);
+
+                    var user = Users.FirstOrDefault(x => x.Id == obj.Name);
+                    if(user != null)
+                    {
+                        user.Pay = obj.Pay;
+                        user.Time = UnixTimeToDateTime(long.Parse(item.LongTime));
+                    }    
+                }
+                
             }
             catch (Exception ex)
             {
@@ -86,6 +99,30 @@ namespace ThuPhi.ViewModels
         void OnLoad()
         {
             Model = JsonConvert.DeserializeObject<Form>(ParameterForm);
+        }
+
+        Template AnalysisSms(string body)
+        {
+            var regexSpace = @"\s+";
+            var regexMoney = @"(?<=(\+))(.*?)(?=VND)";
+            var regexName = @"(?<=(CDP20223 ))(.*?)(?= )";
+
+            var bodyWO = new Regex(regexSpace).Replace(body, " ");
+            var money = new Regex(regexMoney).Match(bodyWO).Value;
+            var name = new Regex(regexName).Match(bodyWO).Value;
+            return new Template { Pay = money, Name = name };
+        }
+
+        public DateTime UnixTimeToDateTime(long unixtime)
+        {
+            var dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            return dtDateTime.AddMilliseconds(unixtime).ToLocalTime();
+        }
+
+        class Template
+        {
+            public string Name { get; set; }
+            public string Pay { get; set; }
         }
         #endregion
 

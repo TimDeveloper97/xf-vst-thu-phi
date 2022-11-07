@@ -2,7 +2,16 @@
 <?xaml-comp compile="true" ?>
 <ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                    xmlns:mdc="clr-namespace:Plugin.MaterialDesignControls;assembly=Plugin.MaterialDesignControls">
+                    xmlns:mdc="clr-namespace:Plugin.MaterialDesignControls;assembly=Plugin.MaterialDesignControls"
+                    xmlns:converter="clr-namespace:ThuPhi.Converters"
+                    xmlns:xct="http://xamarin.com/schemas/2020/toolkit">
+    <!--#region Converter -->
+    <converter:MoneyConverter x:Key="StringToMoney" />
+    <converter:DatetimeConverter x:Key="StringToDateTime" />
+    <converter:CharacterConverter x:Key="StringToCharacter" />
+    
+    <!--#endregion-->
+
     <!--#region Color -->
     <Color x:Key="AppColor">#88221a</Color>
     <Color x:Key="Red">#ff424e</Color>
@@ -56,7 +65,7 @@
     </Style>
 
     <Style TargetType="Grid">
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray950}}"/>
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"/>
     </Style>
 
     <Style TargetType="IndicatorView">
@@ -427,8 +436,9 @@
     <!--#region Config -->
     <x:Double x:Key="Title">20</x:Double>
     <x:Double x:Key="SubTitle">17</x:Double>
-    <x:Double x:Key="MiniTitle">15</x:Double>
+    <x:Double x:Key="MiniTitle">14</x:Double>
     <x:Double x:Key="Header">25</x:Double>
+    <x:Double x:Key="SubHeader">22</x:Double>
     <x:Double x:Key="CornerRadius">5</x:Double>
     <x:Double x:Key="Padding">10</x:Double>
     <x:Double x:Key="Margin">10</x:Double>
@@ -456,7 +466,7 @@
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}" />
     </Style>
     <Style x:Key="SubHeaderLabelStyle" TargetType="Label">
-        <Setter Property="FontSize" Value="{StaticResource SubTitle}"/>
+        <Setter Property="FontSize" Value="{StaticResource SubHeader}"/>
         <Setter Property="HorizontalTextAlignment" Value="Center"/>
         <Setter Property="FontFamily" Value="PoppinsRegular"/>
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}" />
@@ -465,7 +475,7 @@
         <Setter Property="FontSize" Value="{StaticResource MiniTitle}"/>
         <Setter Property="HorizontalTextAlignment" Value="Center"/>
         <Setter Property="FontFamily" Value="PoppinsRegular"/>
-        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray200}}" />
     </Style>
     <Style x:Key="PrimaryButtonStyle" TargetType="Button">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}"/>
@@ -514,13 +524,14 @@
         <Setter Property="BackgroundColor" Value="{StaticResource AppColor}"/>
         <Setter Property="BorderColor" Value="{StaticResource AppColor}"/>
         <Setter Property="CornerRadius" Value="0"/>
+        <Setter Property="BusyColor" Value="{StaticResource AppColor}"/>
     </Style>
     <Style TargetType="mdc:MaterialEntry">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"/>
         <Setter Property="FontSize" Value="{StaticResource SubTitle}"/>
         <Setter Property="LabelSize" Value="{StaticResource SubTitle}"/>
         <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray900}}"/>
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray950}}"/>
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"/>
         <Setter Property="CornerRadius" Value="0"/>
         <Setter Property="Padding" Value="5,0"/>
         <Setter Property="Type" Value="Filled"/>
@@ -538,7 +549,7 @@
     </Style>
     <Style TargetType="mdc:MaterialPicker">
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray950}}"/>
-        <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray900}}"/>
+        <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray900}}"/>
         <Setter Property="Type" Value="Filled"/>
         <Setter Property="Padding" Value="2,2"/>
         <Setter Property="PickerRowHeight" Value="0"/>
@@ -553,7 +564,22 @@
         <Setter Property="ShadowColor" Value="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray950}}"/>
         <Setter Property="FontFamily" Value="MaterialIcons" />
     </Style>
-    
+
+    <Style TargetType="xct:TabViewItem">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray200}}" />
+        <Setter Property="TextColorSelected" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+        <Setter Property="FontSize" Value="{StaticResource Title}" />
+        <Setter Property="FontSizeSelected" Value="{StaticResource Title}" />
+        <Setter Property="Padding" Value="5,0,5,0" />
+        <Setter Property="BadgeTextColor" Value="{StaticResource AppColor}" />
+        <Setter Property="BadgeBorderColor" Value="{StaticResource AppColor}" />
+        <Setter Property="BadgeBackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray900}}" />
+    </Style>
+    <Style TargetType="xct:TabView">
+        <Setter Property="TabIndicatorColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+        <Setter Property="Margin" Value="0,0,0,5" />
+        <Setter Property="TabIndicatorWidth" Value="100" />
+    </Style>
     <!--#endregion-->
 
 </ResourceDictionary>
