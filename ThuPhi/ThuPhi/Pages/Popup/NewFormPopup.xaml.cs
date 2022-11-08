@@ -19,12 +19,26 @@ namespace ThuPhi.Pages.Popup
         {
             InitializeComponent();
             
+            if(fc == null)
+            {
+                title.Text = "Thêm đợt thu phí";
+            }    
+            else
+            {
+                title.Text = "Sửa đợt thu phí";
+                name.Text = fc.Name;
+                content.Text = fc.Content;
+            }    
+
             _formCode = fc;
         }
 
         private void okBtn_Clicked(object sender, EventArgs e)
         {
-            Dismiss(new FormCode());
+            _formCode.Name = name.Text;
+            _formCode.Content = content.Text;
+
+            Dismiss(_formCode);
         }
 
         private void cancelBtn_Clicked(object sender, EventArgs e)

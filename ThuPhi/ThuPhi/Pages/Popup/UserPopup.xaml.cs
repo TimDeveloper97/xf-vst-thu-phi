@@ -22,7 +22,6 @@ namespace ThuPhi.Pages.Popup
             {
                 title.Text = "Tạo người nộp phí";
                 i = new Info();
-                deleteBtn.IsVisible = false;
             }    
             else
             {
@@ -30,7 +29,6 @@ namespace ThuPhi.Pages.Popup
                 name.Text = i.Name;
                 stk.Text = i.AccountNumber;
                 pay.Text = i.Pay;
-                deleteBtn.IsVisible = true;
             }    
 
             _info = i;
@@ -48,12 +46,6 @@ namespace ThuPhi.Pages.Popup
         private void cancelBtn_Clicked(object sender, EventArgs e)
         {
             Dismiss(null);
-        }
-
-        private void deleteBtn_Clicked(object sender, EventArgs e)
-        {
-            _info.Code = null;
-            Dismiss(_info);
         }
     }
 }

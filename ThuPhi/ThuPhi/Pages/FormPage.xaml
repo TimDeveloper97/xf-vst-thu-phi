@@ -29,47 +29,6 @@
 
     <ContentPage.Content>
         <Grid >
-            <!--<StackLayout>
-                <Grid BackgroundColor="{StaticResource AppColor}" HeightRequest="60">
-
-                    <StackLayout HorizontalOptions="Start" VerticalOptions="Center" Orientation="Horizontal">
-                        <Label Style="{StaticResource IconLabel}" Text="{x:Static icon:FontIcons.ArrowLeft}"
-                               TextColor="White" Margin="15,0,0,0">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer NumberOfTapsRequired="1" CommandParameter="{Binding .}"
-                                              Command="{Binding Path=BindingContext.BackCommand, Source={x:Reference Name=self}}"/>
-                            </Label.GestureRecognizers>
-                        </Label>
-
-                        <Label Style="{StaticResource SubHeaderLabelStyle}" Text="{Binding Model.Name}"
-                               TextColor="White" Margin="5,0" VerticalOptions="Center">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer NumberOfTapsRequired="1" CommandParameter="{Binding .}"
-                                              Command="{Binding Path=BindingContext.BackCommand, Source={x:Reference Name=self}}"/>
-                            </Label.GestureRecognizers>
-                        </Label>
-                    </StackLayout>
-
-                    <StackLayout HorizontalOptions="End" VerticalOptions="Center" Orientation="Horizontal">
-                        <Label Style="{StaticResource IconLabel}" Text="{x:Static icon:FontIcons.PlusThick}" 
-                               Margin="0,5,10,5" TextColor="White">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer NumberOfTapsRequired="1" CommandParameter="{Binding .}"
-                                              Command="{Binding Path=BindingContext.NewUserCommand, Source={x:Reference Name=self}}"/>
-                            </Label.GestureRecognizers>
-                        </Label>
-
-                        <Label Style="{StaticResource IconLabel}" Text="{x:Static icon:FontIcons.ContentSave}" 
-                               Margin="0,5,15,5" TextColor="White">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer NumberOfTapsRequired="1" CommandParameter="{Binding .}"
-                                              Command="{Binding Path=BindingContext.SaveCommand, Source={x:Reference Name=self}}"/>
-                            </Label.GestureRecognizers>
-                        </Label>
-                    </StackLayout>
-                </Grid>
-            </StackLayout>-->
-
             <Grid>
                 <xct:TabView TabStripPlacement="Bottom" SelectedIndex="0" IsSwipeEnabled="False">
                     <xct:TabViewItem Text="Đã nộp" BadgeText="{Binding PayCount}">
@@ -88,76 +47,19 @@
                                 <ScrollView Padding="0,0,0,10">
                                     <FlexLayout Direction="Row" Wrap="Wrap" AlignContent="Start" AlignItems="Start"
                                                 JustifyContent="SpaceAround" BindableLayout.ItemsSource="{Binding UsersPay}">
-
                                         <BindableLayout.ItemTemplate>
                                             <DataTemplate>
                                                 <SwipeView>
-                                                    <SwipeView.LeftItems>
+                                                    <SwipeView.RightItems>
                                                         <SwipeItems>
-                                                            <SwipeItem Text="Favorite"/>
-                                                            <SwipeItem Text="Delete"/>
+                                                            <SwipeItem Text="Xóa" Command="{Binding RemoveUserCommand}" CommandParameter="{Binding .}"/>
+                                                            <SwipeItem Text="Sửa" Command="{Binding EditUserCommand}" CommandParameter="{Binding .}"/>
                                                         </SwipeItems>
-                                                    </SwipeView.LeftItems>
-                                                    <Frame WidthRequest="400" Margin="2"
-                                                       xct:TouchEffect.LongPressCommand="{Binding Path=BindingContext.LongPressUserCommand, Source={x:Reference Name=self}}"
-                                                       xct:TouchEffect.LongPressDuration="1000"
-                                                       xct:TouchEffect.CommandParameter="{Binding .}">
-
-                                                        <Grid RowDefinitions="*,1" VerticalOptions="Center">
-                                                            <Grid ColumnDefinitions="50, *, 70" VerticalOptions="Center">
-                                                                <Frame CornerRadius="30" HorizontalOptions="Center" VerticalOptions="Center"
-                                                               WidthRequest="40" HeightRequest="40">
-                                                                    <Label Text="{Binding Name, Converter={StaticResource StringToCharacter}}"
-                                                                       Style="{StaticResource HeaderLabelStyle}" VerticalOptions="Center"/>
-                                                                </Frame>
-                                                                <Grid Grid.Column="1" RowDefinitions="6*,4*">
-                                                                    <Label Text="{Binding Name}" Style="{StaticResource TitleLabelStyle}"
-                                                                       VerticalOptions="End" HorizontalOptions="Start"/>
-                                                                    <Label Grid.Row="1" Text="{Binding Pay, StringFormat='{0} VND', Converter={StaticResource StringToMoney}, TargetNullValue='waiting...'}" 
-                                                                       Style="{StaticResource MiniLabelStyle}" VerticalOptions="Start" HorizontalOptions="Start" Margin="0,-5,0,0"/>
-                                                                </Grid>
-                                                                <Grid Grid.Column="2" VerticalOptions="Center">
-                                                                    <Label Style="{StaticResource MiniLabelStyle}">
-                                                                        <Label.FormattedText>
-                                                                            <FormattedString>
-                                                                                <Span Text="{Binding Time, TargetNullValue='N/A', StringFormat='{} {0:h:mm tt}'}"/>
-                                                                                <Span Text="{Binding Time, TargetNullValue='', StringFormat='{} ({0:dd/MM/yyyy})'}"/>
-                                                                            </FormattedString>
-                                                                        </Label.FormattedText>
-                                                                    </Label>
-                                                                </Grid>
-                                                            </Grid>
-                                                            <BoxView Grid.Row="1"/>
-                                                        </Grid>
-                                                    </Frame>
-                                                </SwipeView>
-                                            </DataTemplate>
-                                        </BindableLayout.ItemTemplate>
-                                    </FlexLayout>
-
-                                </ScrollView>
-                            </RefreshView>
-                        </Grid>
-                    </xct:TabViewItem>
-                    <xct:TabViewItem Text="Cần nộp" BadgeText="{Binding NotPayCount}">
-                        <Grid>
-                            <RefreshView Command="{Binding LoadUserCommand}" IsRefreshing="{Binding IsBusy}"
-                                         RefreshColor="{StaticResource AppColor}" Margin="5,0,0,0">
-                                <ScrollView Padding="0,0,0,10">
-                                    <FlexLayout Direction="Row" Wrap="Wrap" AlignContent="Start" AlignItems="Start"
-                                                JustifyContent="SpaceAround" BindableLayout.ItemsSource="{Binding UsersNotPay}">
-
-                                        <BindableLayout.ItemTemplate>
-                                            <DataTemplate>
-                                                <Frame WidthRequest="400" Margin="2"
-                                                       xct:TouchEffect.LongPressCommand="{Binding Path=BindingContext.LongPressUserCommand, Source={x:Reference Name=self}}"
-                                                       xct:TouchEffect.LongPressDuration="1000"
-                                                       xct:TouchEffect.CommandParameter="{Binding .}">
-
-                                                    <Grid RowDefinitions="*,1" VerticalOptions="Center">
-                                                        <Grid ColumnDefinitions="50, *, 70" VerticalOptions="Center">
+                                                    </SwipeView.RightItems>
+                                                    <Grid RowDefinitions="*,1" WidthRequest="400" VerticalOptions="Center" Padding="5,5">
+                                                        <Grid ColumnDefinitions="50, *, 80" VerticalOptions="Center">
                                                             <Frame CornerRadius="30" HorizontalOptions="Center" VerticalOptions="Center"
-                                                               WidthRequest="40" HeightRequest="40">
+                                                                        WidthRequest="40" HeightRequest="40">
                                                                 <Label Text="{Binding Name, Converter={StaticResource StringToCharacter}}"
                                                                        Style="{StaticResource HeaderLabelStyle}" VerticalOptions="Center"/>
                                                             </Frame>
@@ -167,7 +69,7 @@
                                                                 <Label Grid.Row="1" Text="{Binding Pay, StringFormat='{0} VND', Converter={StaticResource StringToMoney}, TargetNullValue='waiting...'}" 
                                                                        Style="{StaticResource MiniLabelStyle}" VerticalOptions="Start" HorizontalOptions="Start" Margin="0,-5,0,0"/>
                                                             </Grid>
-                                                            <Grid Grid.Column="2" VerticalOptions="Center">
+                                                            <Grid Grid.Column="2" VerticalOptions="Center" Margin="5,0">
                                                                 <Label Style="{StaticResource MiniLabelStyle}">
                                                                     <Label.FormattedText>
                                                                         <FormattedString>
@@ -180,7 +82,58 @@
                                                         </Grid>
                                                         <BoxView Grid.Row="1"/>
                                                     </Grid>
-                                                </Frame>
+                                                </SwipeView>
+                                            </DataTemplate>
+                                        </BindableLayout.ItemTemplate>
+                                    </FlexLayout>
+
+                                </ScrollView>
+                            </RefreshView>
+                        </Grid>
+                    </xct:TabViewItem>
+                    <xct:TabViewItem Text="Cần nộp" BadgeText="{Binding NotPayCount}">
+                        <Grid>
+                            <RefreshView Command="{Binding LoadUserCommand}" IsRefreshing="{Binding IsBusy}"
+                                         RefreshColor="{StaticResource AppColor}" Margin="5,10,0,0">
+                                <ScrollView Padding="0,0,0,10">
+                                    <FlexLayout Direction="Row" Wrap="Wrap" AlignContent="Start" AlignItems="Start"
+                                                JustifyContent="SpaceAround" BindableLayout.ItemsSource="{Binding UsersNotPay}">
+                                        <BindableLayout.ItemTemplate>
+                                            <DataTemplate>
+                                                <SwipeView>
+                                                    <SwipeView.RightItems>
+                                                        <SwipeItems>
+                                                            <SwipeItem Text="Xóa" Command="{Binding RemoveUserCommand}" CommandParameter="{Binding .}"/>
+                                                            <SwipeItem Text="Sửa" Command="{Binding EditUserCommand}" CommandParameter="{Binding .}"/>
+                                                        </SwipeItems>
+                                                    </SwipeView.RightItems>
+                                                    <Grid RowDefinitions="*,1" WidthRequest="400" VerticalOptions="Center" Padding="5,5">
+                                                        <Grid ColumnDefinitions="50, *, 80" VerticalOptions="Center">
+                                                            <Frame CornerRadius="30" HorizontalOptions="Center" VerticalOptions="Center"
+                                                                        WidthRequest="40" HeightRequest="40">
+                                                                <Label Text="{Binding Name, Converter={StaticResource StringToCharacter}}"
+                                                                       Style="{StaticResource HeaderLabelStyle}" VerticalOptions="Center"/>
+                                                            </Frame>
+                                                            <Grid Grid.Column="1" RowDefinitions="6*,4*">
+                                                                <Label Text="{Binding Name}" Style="{StaticResource TitleLabelStyle}"
+                                                                       VerticalOptions="End" HorizontalOptions="Start"/>
+                                                                <Label Grid.Row="1" Text="{Binding Pay, StringFormat='{0} VND', Converter={StaticResource StringToMoney}, TargetNullValue='waiting...'}" 
+                                                                       Style="{StaticResource MiniLabelStyle}" VerticalOptions="Start" HorizontalOptions="Start" Margin="0,-5,0,0"/>
+                                                            </Grid>
+                                                            <Grid Grid.Column="2" VerticalOptions="Center" Margin="5,0">
+                                                                <Label Style="{StaticResource MiniLabelStyle}">
+                                                                    <Label.FormattedText>
+                                                                        <FormattedString>
+                                                                            <Span Text="{Binding Time, TargetNullValue='N/A', StringFormat='{} {0:h:mm tt}'}"/>
+                                                                            <Span Text="{Binding Time, TargetNullValue='', StringFormat='{} ({0:dd/MM/yyyy})'}"/>
+                                                                        </FormattedString>
+                                                                    </Label.FormattedText>
+                                                                </Label>
+                                                            </Grid>
+                                                        </Grid>
+                                                        <BoxView Grid.Row="1"/>
+                                                    </Grid>
+                                                </SwipeView>
                                             </DataTemplate>
                                         </BindableLayout.ItemTemplate>
                                     </FlexLayout>

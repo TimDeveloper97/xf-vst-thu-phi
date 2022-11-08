@@ -22,16 +22,13 @@
         <Grid>
             <Frame HorizontalOptions="Fill" VerticalOptions="Center" CornerRadius="0">
                 <StackLayout>
-                    <Grid BackgroundColor="{StaticResource AppColor}" HeightRequest="60">
-                        <Label Text="Cập nhật đợt thu phí" TextColor="White"
+                    <Grid BackgroundColor="{StaticResource AppColor}" HeightRequest="55">
+                        <Label x:Name="title" TextColor="White"
                                FontSize="{StaticResource Title}" Margin="{StaticResource Margin}"/>
                     </Grid>
                     <Grid Margin="20,-5,20,5" RowDefinitions="*,*" HeightRequest="170">
-                        <mdc:MaterialEntry LabelText="Tên gọi *" Text="{Binding UserName}"/>
-                        <Grid Grid.Row="1" ColumnDefinitions="*,*">
-                            <mdc:MaterialEntry Grid.Column="0" LabelText="Ký hiệu *" Text="{Binding UserName}"/>
-                            <mdc:MaterialEntry Grid.Column="1" LabelText="Mẫu nội dung *" Text="{Binding UserName}"/>
-                        </Grid>
+                        <mdc:MaterialEntry x:Name="name" LabelText="Tên gọi *"/>
+                        <mdc:MaterialEntry x:Name="content" LabelText="Mẫu nội dung *"/>
                     </Grid>
                     
                     <Grid Style="{StaticResource GroupGridStyle}" VerticalOptions="Center" Margin="0,10,0,0" Padding="0,10">

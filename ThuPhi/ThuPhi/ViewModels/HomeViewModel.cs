@@ -47,7 +47,18 @@ namespace ThuPhi.ViewModels
 
         public ICommand NewFormPopupCommand => new Command(async () =>
         {
-            var x = await Shell.Current.ShowPopupAsync(new NewFormPopup(new FormCode()));
+            var fc = await Shell.Current.ShowPopupAsync(new NewFormPopup(null));
+
+            var detail = new DetailForm
+            {
+                Content = fc.Content,
+                Name = fc.Name,
+                Time = DateTime.Now,
+            };
+            var isOK = await Service.CloneCollection(Token, detail);
+
+            if (isOK) Message.ShortAlert("Thành công");
+            else Message.ShortAlert("Thất bại");
         });
 
         public ICommand SelectCollectionCommand => new Command<Form>(async (obj) =>

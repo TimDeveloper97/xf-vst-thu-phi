@@ -50,23 +50,13 @@ namespace ThuPhi.ViewModels
         public string SumPay { get => sumPay; set => SetProperty(ref sumPay, value); }
         #endregion
 
-        #region Command RemoveUserCommand
+        #region Command
         public ICommand PageAppearingCommand => new Command(() =>
         {
 
         });
 
-        public ICommand EditUserCommand => new Command(() =>
-        {
-
-        });
-
-        public ICommand RemoveUserCommand => new Command(() =>
-        {
-
-        });
-
-        public ICommand LongPressUserCommand => new Command<Info>(async (obj) =>
+        public ICommand EditUserCommand => new Command<Info>(async (obj) =>
         {
             Info old = new Info
             {
@@ -80,24 +70,15 @@ namespace ThuPhi.ViewModels
             };
             var update = await Shell.Current.ShowPopupAsync(new UserPopup(obj));
 
-            if (update != null)
+            if(update != null)
             {
-                #region Remove
-                if(update.Code == null)
-                {
-                    UsersPay.Remove(obj);
-                    UsersNotPay.Remove(obj);
-                    return;
-                }    
-                #endregion
-
                 #region OK
                 if ((old.Pay == null || string.IsNullOrEmpty(old.Pay) || long.Parse(old.Pay) == 0)
                 && (update.Pay != null && long.Parse(update.Pay) != 0))
                 {
                     UsersPay.AddByOrder(update);
                     UsersNotPay.Remove(obj);
-                } 
+                }
                 else if ((old.Pay != null && long.Parse(old.Pay) != 0)
                 && (update.Pay == null || string.IsNullOrEmpty(update.Pay) || long.Parse(update.Pay) == 0))
                 {
@@ -106,14 +87,29 @@ namespace ThuPhi.ViewModels
                 }
                 #endregion
             }
-
-            PayCount = UsersPay.Count.ToString();
-            NotPayCount = UsersNotPay.Count.ToString();
         });
 
-        public ICommand SaveUserCommand => new Command<Info>(async (obj) =>
+        public ICommand RemoveUserCommand => new Command<Info>((obj) =>
         {
+            users.Remove(obj);
+            UsersPay.Remove(obj);
+            UsersNotPay.Remove(obj);
+        });
 
+        public ICommand SaveUserCommand => new Command(async () =>
+        {
+            var detail = new DetailForm(model);
+
+            foreach (var user in users)
+            {
+                detail.Items.Add(user);
+            }
+
+            var popup = await Shell.Current.ShowPopupAsync(new ListUserPopup(detail));
+            var isOK = await Service.CloneCollection(Token, popup);
+
+            if (isOK) Message.ShortAlert("Thành công");
+            else Message.ShortAlert("Thất bại");
         });
 
         public ICommand CloneUserCommand => new Command(async () =>
@@ -122,16 +118,14 @@ namespace ThuPhi.ViewModels
 
             foreach (var user in users)
             {
-                user.Pay = null;
-                user.Time = null;
-                user.Code = null;
-
                 detail.Items.Add(user);
             }
 
-            var result = await Shell.Current.ShowPopupAsync(new ListUserPopup(detail));
+            var popup = await Shell.Current.ShowPopupAsync(new ListUserPopup(detail));
+            var isOK = await Service.CloneCollection(Token, popup);
 
-
+            if (isOK) Message.ShortAlert("Thành công");
+            else Message.ShortAlert("Thất bại");
         });
 
         public ICommand NewUserCommand => new Command(async () =>

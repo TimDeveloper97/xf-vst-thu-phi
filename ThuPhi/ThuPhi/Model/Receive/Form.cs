@@ -32,6 +32,8 @@ namespace ThuPhi.Model.Receive
             Name = form.Name;
             Content = form.Content;
             Time = form.Time;
+
+            Items = new List<Info>();
         }
     }
 

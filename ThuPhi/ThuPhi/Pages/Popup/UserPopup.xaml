@@ -23,7 +23,7 @@
         <Grid>
             <Frame HorizontalOptions="Fill" VerticalOptions="Center" CornerRadius="0">
                 <StackLayout>
-                    <Grid BackgroundColor="{StaticResource AppColor}" HeightRequest="60">
+                    <Grid BackgroundColor="{StaticResource AppColor}" HeightRequest="55">
                         <Label x:Name="title" TextColor="White" 
                                FontSize="{StaticResource Title}" Margin="{StaticResource Margin}"/>
                     </Grid>
@@ -37,7 +37,6 @@
 
                     <Grid Style="{StaticResource GroupGridStyle}" VerticalOptions="Center" Margin="0,10,0,0" Padding="0,10">
                         <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
-                            <mdc:MaterialButton x:Name="deleteBtn" WidthRequest="100" Clicked="deleteBtn_Clicked" Text="Delete"/>
                             <mdc:MaterialButton x:Name="okBtn" WidthRequest="100" Clicked="okBtn_Clicked" Text="OK"/>
                             <mdc:MaterialButton x:Name="cancelBtn" Style="{StaticResource HideButtonStyle}" WidthRequest="100" Clicked="cancelBtn_Clicked" Text="Cancel"/>
                         </StackLayout>
