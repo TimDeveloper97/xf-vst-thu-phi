@@ -68,7 +68,7 @@
                 <xct:TabView TabStripPlacement="Bottom" SelectedIndex="0">
                     <xct:TabViewItem Text="Đã nộp" BadgeText="{Binding PayCount}">
                         <Grid RowDefinitions="40, *">
-                            <Label Style="{StaticResource TitleLabelStyle}" HorizontalOptions="End" VerticalOptions="Center">
+                            <Label Style="{StaticResource TitleLabelStyle}" HorizontalOptions="End" VerticalOptions="Center" Margin="0,0,10,0">
                                 <Label.FormattedText>
                                     <FormattedString>
                                         <Span Text="Tổng tiền: "/>

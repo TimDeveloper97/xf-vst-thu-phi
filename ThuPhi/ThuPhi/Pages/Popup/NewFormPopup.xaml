@@ -22,8 +22,8 @@
         <Grid>
             <Frame HorizontalOptions="Fill" VerticalOptions="Center" CornerRadius="0">
                 <StackLayout>
-                    <Grid BackgroundColor="{StaticResource AppColor}" HeightRequest="50">
-                        <Label Text="Cập nhật đợt thu phí" TextColor="White" 
+                    <Grid BackgroundColor="{StaticResource AppColor}" HeightRequest="60">
+                        <Label Text="Cập nhật đợt thu phí" TextColor="White"
                                FontSize="{StaticResource Title}" Margin="{StaticResource Margin}"/>
                     </Grid>
                     <Grid Margin="20,-5,20,5" RowDefinitions="*,*" HeightRequest="170">
