@@ -6,7 +6,7 @@ using ThuPhi.Domain;
 
 namespace ThuPhi.Model.Receive
 {
-    class Form
+    public class Form
     {
         [JsonProperty("Ten")]
         public string Name { get; set; }
@@ -21,7 +21,7 @@ namespace ThuPhi.Model.Receive
         public string Id { get; set; }
     }
 
-    class DetailForm : Form
+    public class DetailForm : Form
     {
         [JsonProperty("items")]
         public List<Info> Items { get; set; }

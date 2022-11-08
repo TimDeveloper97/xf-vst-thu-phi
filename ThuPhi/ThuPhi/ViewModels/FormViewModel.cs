@@ -50,8 +50,18 @@ namespace ThuPhi.ViewModels
         public string SumPay { get => sumPay; set => SetProperty(ref sumPay, value); }
         #endregion
 
-        #region Command 
+        #region Command RemoveUserCommand
         public ICommand PageAppearingCommand => new Command(() =>
+        {
+
+        });
+
+        public ICommand EditUserCommand => new Command(() =>
+        {
+
+        });
+
+        public ICommand RemoveUserCommand => new Command(() =>
         {
 
         });
