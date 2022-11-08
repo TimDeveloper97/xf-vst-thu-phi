@@ -25,6 +25,14 @@ namespace ThuPhi.Model.Receive
     {
         [JsonProperty("items")]
         public List<Info> Items { get; set; }
+
+        public DetailForm() { }
+        public DetailForm(Form form) {
+            Id = form.Id;
+            Name = form.Name;
+            Content = form.Content;
+            Time = form.Time;
+        }
     }
 
     public class Info : BaseBinding

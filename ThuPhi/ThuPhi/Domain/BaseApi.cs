@@ -100,5 +100,38 @@ namespace ThuPhi.Domain
 
             return default(R);
         }
+
+        public static async Task<bool> Put(BaseModel bm)
+        {
+            var httpClient = new HttpClient();
+
+            var json = JsonConvert.SerializeObject(bm);
+            HttpContent httpContent = new StringContent(json);
+
+            httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            try
+            {
+                var response = await httpClient.PostAsync(Url, httpContent);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    var jBaseModel = JsonConvert.DeserializeObject<BaseModel>(content);
+
+                    if (jBaseModel.Code != 0 || jBaseModel.Value == null)
+                    {
+                        DependencyService.Get<IMessage>().ShortAlert(jBaseModel.Message);
+                        return false;
+                    }
+
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: fail to call api");
+            }
+            return false;
+        }
     }
 }

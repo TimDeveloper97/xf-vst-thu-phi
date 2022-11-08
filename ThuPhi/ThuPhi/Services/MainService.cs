@@ -10,6 +10,24 @@ namespace ThuPhi.Services
 {
     class MainService : IMainService
     {
+        public async Task<bool> CloneCollection(string token, DetailForm detail)
+        {
+            detail.Id = null;
+
+            var res = await Service<bool>.Put(new BaseModel 
+            { 
+                Token = token, 
+                Url = Api.UpdateDotThu, 
+                Value = new 
+                { 
+                    code = 100, 
+                    value = detail,
+                } 
+            });
+
+            return res;
+        }
+
         public async Task<DetailForm> FindCollection(string token, string id)
         {
             var res = await Service<DetailForm>.Post(new BaseModel { Token = token, Url = Api.UpdateDotThu, Value = new { code = 3, _id = id } });

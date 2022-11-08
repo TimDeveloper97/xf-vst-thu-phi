@@ -34,6 +34,7 @@ namespace ThuPhi
             Routing.RegisterRoute(nameof(FormPage), typeof(FormPage));
             Routing.RegisterRoute(nameof(NewFormPopup), typeof(NewFormPopup));
             Routing.RegisterRoute(nameof(UserPopup), typeof(UserPopup));
+            Routing.RegisterRoute(nameof(ListUserPopup), typeof(ListUserPopup));
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)

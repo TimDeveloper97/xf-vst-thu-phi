@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              
-             Shell.NavBarIsVisible="False"
+             Shell.NavBarIsVisible="True"
              xmlns:mdc="clr-namespace:Plugin.MaterialDesignControls;assembly=Plugin.MaterialDesignControls"
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              xmlns:icon="clr-namespace:ThuPhi.Resources"
@@ -20,10 +20,16 @@
                 EventName="Appearing"
                 Command="{Binding PageAppearingCommand}" />
     </ContentPage.Behaviors>
-    
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Thêm người nộp" Order="Secondary" Priority="0" Command="{Binding NewUserCommand}"/>
+        <ToolbarItem Text="Lưu thông tin" Order="Secondary" Priority="1" Command="{Binding SaveUserCommand}"/>
+        <ToolbarItem Text="Tạo đợt thu" Order="Secondary" Priority="2" Command="{Binding CloneUserCommand}"/>
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
-        <Grid RowDefinitions="60, *">
-            <StackLayout>
+        <Grid >
+            <!--<StackLayout>
                 <Grid BackgroundColor="{StaticResource AppColor}" HeightRequest="60">
 
                     <StackLayout HorizontalOptions="Start" VerticalOptions="Center" Orientation="Horizontal">
@@ -62,9 +68,9 @@
                         </Label>
                     </StackLayout>
                 </Grid>
-            </StackLayout>
+            </StackLayout>-->
 
-            <Grid Grid.Row="1">
+            <Grid>
                 <xct:TabView TabStripPlacement="Bottom" SelectedIndex="0">
                     <xct:TabViewItem Text="Đã nộp" BadgeText="{Binding PayCount}">
                         <Grid RowDefinitions="40, *">

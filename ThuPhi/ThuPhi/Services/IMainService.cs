@@ -14,5 +14,6 @@ namespace ThuPhi.Services
         Task<Account> Login(string username, string password);
         Task<List<Form>> InfoCollection(string token);
         Task<DetailForm> FindCollection(string token, string id);
+        Task<bool> CloneCollection(string token, DetailForm detail);
     }
 }

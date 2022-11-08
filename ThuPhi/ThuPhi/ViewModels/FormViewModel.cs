@@ -101,8 +101,27 @@ namespace ThuPhi.ViewModels
             NotPayCount = UsersNotPay.Count.ToString();
         });
 
-        public ICommand SaveCommand => new Command<Info>(async (obj) =>
+        public ICommand SaveUserCommand => new Command<Info>(async (obj) =>
         {
+
+        });
+
+        public ICommand CloneUserCommand => new Command(async () =>
+        {
+            var detail = new DetailForm(model);
+
+            foreach (var user in users)
+            {
+                user.Pay = null;
+                user.Time = null;
+                user.Code = null;
+
+                detail.Items.Add(user);
+            }
+
+            var result = await Shell.Current.ShowPopupAsync(new ListUserPopup(detail));
+
+
         });
 
         public ICommand NewUserCommand => new Command(async () =>

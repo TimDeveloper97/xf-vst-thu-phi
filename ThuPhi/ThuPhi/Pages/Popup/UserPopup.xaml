@@ -23,7 +23,7 @@
         <Grid>
             <Frame HorizontalOptions="Fill" VerticalOptions="Center" CornerRadius="0">
                 <StackLayout>
-                    <Grid BackgroundColor="{StaticResource AppColor}" HeightRequest="50">
+                    <Grid BackgroundColor="{StaticResource AppColor}" HeightRequest="60">
                         <Label x:Name="title" TextColor="White" 
                                FontSize="{StaticResource Title}" Margin="{StaticResource Margin}"/>
                     </Grid>
