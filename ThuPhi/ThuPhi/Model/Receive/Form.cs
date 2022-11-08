@@ -29,14 +29,16 @@ namespace ThuPhi.Model.Receive
 
     public class Info : BaseBinding
     {
+        public string Code { get; set; }
+
         [JsonProperty("_id")]
         public string Id { get; set; }
 
         [JsonProperty("HoTen")]
-        public string Name { get; set; }
+        private string name;
 
         [JsonProperty("SoTK")]
-        public string AccountNumber { get; set; }
+        private string accountNumber;
 
         [JsonProperty("SoTT")]
         public string Order { get; set; }
@@ -53,5 +55,7 @@ namespace ThuPhi.Model.Receive
         public DateTime? Time { get => time; set => SetProperty(ref time, value); }
         public string Owe { get => owe; set => SetProperty(ref owe, value); }
         public string Pay { get => pay; set => SetProperty(ref pay, value); }
+        public string Name { get => name; set => SetProperty(ref name, value); }
+        public string AccountNumber { get => accountNumber; set => SetProperty(ref accountNumber, value); }
     }
 }

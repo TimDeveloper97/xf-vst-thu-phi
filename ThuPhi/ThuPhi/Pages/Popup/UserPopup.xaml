@@ -30,8 +30,8 @@
                     <Grid Margin="20,-5,20,5" RowDefinitions="*,*" HeightRequest="170">
                         <mdc:MaterialEntry x:Name="name" LabelText="Họ và Tên *"/>
                         <Grid Grid.Row="1" ColumnDefinitions="*,*">
-                            <mdc:MaterialEntry x:Name="stk" Grid.Column="0" LabelText="Số TK"/>
-                            <mdc:MaterialEntry x:Name="pay" Grid.Column="1" LabelText="Số tiền nộp"/>
+                            <mdc:MaterialEntry x:Name="stk" Grid.Column="0" LabelText="Số TK" Keyboard="Numeric"/>
+                            <mdc:MaterialEntry x:Name="pay" Grid.Column="1" LabelText="Số tiền nộp" Keyboard="Numeric" MaxLength="15"/>
                         </Grid>
                     </Grid>
 

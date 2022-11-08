@@ -18,7 +18,7 @@ namespace ThuPhi.Converters
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value != null)
+            if (value != null && !string.IsNullOrEmpty(value.ToString()))
                 return DatetimeToString(value.ToString());
             return null;
         }

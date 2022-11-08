@@ -9,11 +9,18 @@ using System.Windows.Input;
 using ThuPhi.Domain;
 using ThuPhi.Model.Receive;
 using ThuPhi.Pages.Popup;
+using ThuPhi.Resources;
 using Xamarin.CommunityToolkit.Extensions;
 using Xamarin.Forms;
 
 namespace ThuPhi.ViewModels
 {
+    class Template
+    {
+        public string Name { get; set; }
+        public string Pay { get; set; }
+    }
+
     [QueryProperty(nameof(ParameterForm), nameof(ParameterForm))]
     class FormViewModel : BaseViewModel
     {
@@ -51,7 +58,37 @@ namespace ThuPhi.ViewModels
 
         public ICommand LongPressUserCommand => new Command<Info>(async (obj) =>
         {
-            var x = await Shell.Current.ShowPopupAsync(new UserPopup(obj));
+            Info old = new Info
+            {
+                AccountNumber = obj.AccountNumber,
+                Code = obj.Code,
+                Name = obj.Name,
+                Pay = obj.Pay,
+                Time = obj.Time,
+                Order = obj.Order,
+                Id = obj.Id,
+            };
+            var update = await Shell.Current.ShowPopupAsync(new UserPopup(obj));
+
+            if (update != null)
+            {
+                if((old.Pay == null || string.IsNullOrEmpty(old.Pay) || long.Parse(old.Pay) == 0)
+                && (update.Pay != null && long.Parse(update.Pay) != 0))
+                {
+                    UsersPay.AddByOrder(update);
+                    UsersNotPay.Remove(obj);
+                }    
+
+                if((old.Pay != null && long.Parse(old.Pay) != 0)
+                && (update.Pay == null || string.IsNullOrEmpty(update.Pay) || long.Parse(update.Pay) == 0))
+                {
+                    UsersNotPay.AddByOrder(update);
+                    UsersPay.Remove(obj);
+                }    
+            }
+
+            PayCount = UsersPay.Count.ToString();
+            NotPayCount = UsersNotPay.Count.ToString();
         });
 
         public ICommand SaveCommand => new Command<Info>(async (obj) =>
@@ -60,7 +97,19 @@ namespace ThuPhi.ViewModels
 
         public ICommand NewUserCommand => new Command(async () =>
         {
-            var x = await Shell.Current.ShowPopupAsync(new UserPopup(null));
+            var user = await Shell.Current.ShowPopupAsync(new UserPopup(null));
+            if (user != null)
+            {
+                user.Code = Guid.NewGuid().ToString();
+                users.Add(user);
+
+                if (user.Pay == null || long.Parse(user.Pay) == 0)
+                {
+                    UsersNotPay.AddByOrder(user);
+                }
+                else
+                    UsersPay.AddByOrder(user);
+            }
         });
 
         public ICommand BackCommand => new Command(async () => await Shell.Current.GoToAsync($".."));
@@ -106,13 +155,15 @@ namespace ThuPhi.ViewModels
 
                 foreach (var item in users)
                 {
-                    if (string.IsNullOrEmpty(item.Pay) || int.Parse(item.Pay) == 0)
+                    item.Code = Guid.NewGuid().ToString();
+
+                    if (string.IsNullOrEmpty(item.Pay) || long.Parse(item.Pay) == 0)
                         UsersNotPay.Add(item);
                     else
                     {
                         UsersPay.Add(item);
                         SumPay = (long.Parse(item.Pay) + long.Parse(SumPay)).ToString();
-                    }    
+                    }
                 }
 
                 PayCount = UsersPay.Count.ToString();
@@ -190,13 +241,6 @@ namespace ThuPhi.ViewModels
             }
             return new Template { Name = s.ToUpper(), Pay = a.ToString() };
         }
-
-        class Template
-        {
-            public string Name { get; set; }
-            public string Pay { get; set; }
-        }
         #endregion
-
     }
 }
