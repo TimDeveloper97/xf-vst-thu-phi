@@ -52,7 +52,8 @@ namespace ThuPhi.Pages.Popup
 
         private void deleteBtn_Clicked(object sender, EventArgs e)
         {
-            Dismiss(null);
+            _info.Code = null;
+            Dismiss(_info);
         }
     }
 }

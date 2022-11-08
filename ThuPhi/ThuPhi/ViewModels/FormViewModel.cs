@@ -72,19 +72,29 @@ namespace ThuPhi.ViewModels
 
             if (update != null)
             {
-                if((old.Pay == null || string.IsNullOrEmpty(old.Pay) || long.Parse(old.Pay) == 0)
+                #region Remove
+                if(update.Code == null)
+                {
+                    UsersPay.Remove(obj);
+                    UsersNotPay.Remove(obj);
+                    return;
+                }    
+                #endregion
+
+                #region OK
+                if ((old.Pay == null || string.IsNullOrEmpty(old.Pay) || long.Parse(old.Pay) == 0)
                 && (update.Pay != null && long.Parse(update.Pay) != 0))
                 {
                     UsersPay.AddByOrder(update);
                     UsersNotPay.Remove(obj);
-                }    
-
-                if((old.Pay != null && long.Parse(old.Pay) != 0)
+                } 
+                else if ((old.Pay != null && long.Parse(old.Pay) != 0)
                 && (update.Pay == null || string.IsNullOrEmpty(update.Pay) || long.Parse(update.Pay) == 0))
                 {
                     UsersNotPay.AddByOrder(update);
                     UsersPay.Remove(obj);
-                }    
+                }
+                #endregion
             }
 
             PayCount = UsersPay.Count.ToString();
