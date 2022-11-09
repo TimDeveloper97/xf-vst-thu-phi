@@ -9,7 +9,7 @@
              xmlns:lang="clr-namespace:ThuPhi.Resources.Languages"
              xmlns:m="clr-namespace:ThuPhi.Model.Receive"
              x:TypeArguments="m:DetailForm"
-             Size="350,270"
+             Size="350,300"
              IsLightDismissEnabled="False"
              x:Name="self"
              
@@ -29,20 +29,18 @@
                                FontSize="{StaticResource Title}" Margin="{StaticResource Margin}"/>
                     </Grid>
 
-                    <ScrollView>
-                        <ListView x:Name="list" Margin="5,0,5,0" HeightRequest="150" SelectionMode="None">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <ViewCell>
-                                        <Grid ColumnDefinitions="40, *" VerticalOptions="Center">
-                                            <CheckBox IsChecked="{Binding IsChecked}" VerticalOptions="Center"/>
-                                            <Label Grid.Column="1" Text="{Binding Name}" VerticalOptions="Center"/>
-                                        </Grid>
-                                    </ViewCell>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                    </ScrollView>
+                    <ListView x:Name="list" Margin="5,0,5,0" HeightRequest="210" SelectionMode="None">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid ColumnDefinitions="40, *" VerticalOptions="Center">
+                                        <CheckBox IsChecked="{Binding IsChecked}" VerticalOptions="Center"/>
+                                        <Label Grid.Column="1" Text="{Binding Name}" VerticalOptions="Center"/>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
 
                     <Grid Style="{StaticResource GroupGridStyle}" VerticalOptions="Center" Padding="0,10">
                         <StackLayout HorizontalOptions="Center" Orientation="Horizontal">

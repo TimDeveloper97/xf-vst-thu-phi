@@ -70,7 +70,7 @@ namespace ThuPhi.ViewModels
             };
             var update = await Shell.Current.ShowPopupAsync(new UserPopup(obj));
 
-            if(update != null)
+            if (update != null)
             {
                 #region OK
                 if ((old.Pay == null || string.IsNullOrEmpty(old.Pay) || long.Parse(old.Pay) == 0)
@@ -188,13 +188,14 @@ namespace ThuPhi.ViewModels
                 var msgs = Sms.GetByContentAndDateTime(res.Content, res.Time);
                 foreach (var item in msgs)
                 {
-                    var obj = AnalysisSms(item.Content, res.Content);
-                    //var obj = Split(item.Content, res.Content);
+                    var obj = AnalysisSms(item.Content.ToUpper(), res.Content.ToUpper());
+                    //if (string.IsNullOrEmpty(obj.Name) || string.IsNullOrEmpty(obj.Pay))
+                    //    obj = Split(item.Content.ToUpper(), res.Content.ToUpper());
 
                     var user = users.FirstOrDefault(x => x.Id == obj.Name);
                     if (user != null)
                     {
-                        user.Pay = obj.Pay;
+                        user.Pay = (long.Parse(user.Pay ?? "0") + long.Parse(obj.Pay)).ToString();
                         user.Time = UnixTimeToDateTime(long.Parse(item.LongTime));
                     }
                 }
@@ -252,11 +253,15 @@ namespace ThuPhi.ViewModels
             var regexSpace = @"\s+";
             var regexMoney = @"(?<=(\+))(.*?)(?=VND)";
             var regexName = $"(?<=({content} ))(.*?)(?= )";
+            var regexName1 = $"(?<=({content} ))(.*?)(.*)";
 
             var bodyWO = new Regex(regexSpace).Replace(body, " ");
             var money = new Regex(regexMoney).Match(bodyWO).Value;
-            var name = new Regex(regexName).Match(bodyWO).Value;
-            return new Template { Pay = money.Replace(",", ""), Name = name };
+            string name = new Regex(regexName).Match(bodyWO).Value;
+            if(string.IsNullOrEmpty(name))
+                name = new Regex(regexName1).Match(bodyWO).Value;
+
+            return new Template { Pay = money.Replace(",", ""), Name = name.ToUpper() };
         }
 
         DateTime UnixTimeToDateTime(long unixtime)
