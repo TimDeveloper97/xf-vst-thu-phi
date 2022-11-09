@@ -52,8 +52,8 @@
                                                 <SwipeView>
                                                     <SwipeView.RightItems>
                                                         <SwipeItems>
-                                                            <SwipeItem Text="Xóa" Command="{Binding RemoveUserCommand}" CommandParameter="{Binding .}"/>
-                                                            <SwipeItem Text="Sửa" Command="{Binding EditUserCommand}" CommandParameter="{Binding .}"/>
+                                                            <SwipeItem Text="Xóa" Command="{Binding Path=BindingContext.RemoveUserCommand, Source={x:Reference Name=self}}" CommandParameter="{Binding .}"/>
+                                                            <SwipeItem Text="Sửa" Command="{Binding Path=BindingContext.EditUserCommand, Source={x:Reference Name=self}}" CommandParameter="{Binding .}"/>
                                                         </SwipeItems>
                                                     </SwipeView.RightItems>
                                                     <Grid RowDefinitions="*,1" WidthRequest="400" VerticalOptions="Center" Padding="5,5">
@@ -103,8 +103,8 @@
                                                 <SwipeView>
                                                     <SwipeView.RightItems>
                                                         <SwipeItems>
-                                                            <SwipeItem Text="Xóa" Command="{Binding RemoveUserCommand}" CommandParameter="{Binding .}"/>
-                                                            <SwipeItem Text="Sửa" Command="{Binding EditUserCommand}" CommandParameter="{Binding .}"/>
+                                                            <SwipeItem Text="Xóa" Command="{Binding Path=BindingContext.RemoveUserCommand, Source={x:Reference Name=self}}" CommandParameter="{Binding .}"/>
+                                                            <SwipeItem Text="Sửa" Command="{Binding Path=BindingContext.EditUserCommand, Source={x:Reference Name=self}}" CommandParameter="{Binding .}"/>
                                                         </SwipeItems>
                                                     </SwipeView.RightItems>
                                                     <Grid RowDefinitions="*,1" WidthRequest="400" VerticalOptions="Center" Padding="5,5">

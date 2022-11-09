@@ -28,7 +28,7 @@
                     </Grid>
                     <Grid Margin="20,-5,20,5" RowDefinitions="*,*" HeightRequest="170">
                         <mdc:MaterialEntry x:Name="name" LabelText="Tên gọi *"/>
-                        <mdc:MaterialEntry x:Name="content" LabelText="Mẫu nội dung *"/>
+                        <mdc:MaterialEntry Grid.Row="1" x:Name="content" LabelText="Mẫu nội dung *"/>
                     </Grid>
                     
                     <Grid Style="{StaticResource GroupGridStyle}" VerticalOptions="Center" Margin="0,10,0,0" Padding="0,10">

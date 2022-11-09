@@ -22,6 +22,7 @@ namespace ThuPhi.Pages.Popup
             if(fc == null)
             {
                 title.Text = "Thêm đợt thu phí";
+                fc = new FormCode();
             }    
             else
             {

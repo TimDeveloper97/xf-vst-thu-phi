@@ -85,6 +85,11 @@ namespace ThuPhi.ViewModels
                     UsersNotPay.AddByOrder(update);
                     UsersPay.Remove(obj);
                 }
+
+                SumPay = UsersPay.Sum(x => long.Parse(x.Pay)).ToString();
+
+                PayCount = UsersPay.Count.ToString();
+                NotPayCount = UsersNotPay.Count.ToString();
                 #endregion
             }
         });
@@ -94,6 +99,11 @@ namespace ThuPhi.ViewModels
             users.Remove(obj);
             UsersPay.Remove(obj);
             UsersNotPay.Remove(obj);
+
+            SumPay = UsersPay.Sum(x => long.Parse(x.Pay)).ToString();
+
+            PayCount = UsersPay.Count.ToString();
+            NotPayCount = UsersNotPay.Count.ToString();
         });
 
         public ICommand SaveUserCommand => new Command(async () =>
@@ -105,8 +115,7 @@ namespace ThuPhi.ViewModels
                 detail.Items.Add(user);
             }
 
-            var popup = await Shell.Current.ShowPopupAsync(new ListUserPopup(detail));
-            var isOK = await Service.CloneCollection(Token, popup);
+            var isOK = await Service.SaveCollection(Token, detail);
 
             if (isOK) Message.ShortAlert("Thành công");
             else Message.ShortAlert("Thất bại");
@@ -114,15 +123,20 @@ namespace ThuPhi.ViewModels
 
         public ICommand CloneUserCommand => new Command(async () =>
         {
-            var detail = new DetailForm(model);
+            var popup = await Shell.Current.ShowPopupAsync(new ListUserPopup(new DetailForm { Items = users.OrderBy(x => x.Name).ToList() }));
+            if (popup == null) return;
+            var fc = await Shell.Current.ShowPopupAsync(new NewFormPopup(null));
+            if (fc == null) return;
 
-            foreach (var user in users)
+            var detail = new DetailForm
             {
-                detail.Items.Add(user);
-            }
+                Content = fc.Content,
+                Name = fc.Name,
+                Time = DateTime.Now,
+                Items = popup.Items,
+            };
 
-            var popup = await Shell.Current.ShowPopupAsync(new ListUserPopup(detail));
-            var isOK = await Service.CloneCollection(Token, popup);
+            var isOK = await Service.CloneCollection(Token, detail);
 
             if (isOK) Message.ShortAlert("Thành công");
             else Message.ShortAlert("Thất bại");
@@ -139,9 +153,14 @@ namespace ThuPhi.ViewModels
                 if (user.Pay == null || long.Parse(user.Pay) == 0)
                 {
                     UsersNotPay.AddByOrder(user);
+                    NotPayCount = UsersNotPay.Count.ToString();
                 }
                 else
+                {
                     UsersPay.AddByOrder(user);
+                    PayCount = UsersPay.Count.ToString();
+                    SumPay = UsersPay.Sum(x => long.Parse(x.Pay)).ToString();
+                }
             }
         });
 

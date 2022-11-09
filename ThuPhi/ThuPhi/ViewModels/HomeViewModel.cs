@@ -49,15 +49,22 @@ namespace ThuPhi.ViewModels
         {
             var fc = await Shell.Current.ShowPopupAsync(new NewFormPopup(null));
 
+            if (fc == null) return;
+
             var detail = new DetailForm
             {
                 Content = fc.Content,
                 Name = fc.Name,
                 Time = DateTime.Now,
+                Items = new List<Info>(),
             };
             var isOK = await Service.CloneCollection(Token, detail);
 
-            if (isOK) Message.ShortAlert("Thành công");
+            if (isOK)
+            {
+                IsBusy = true;
+                Message.ShortAlert("Thành công");
+            }
             else Message.ShortAlert("Thất bại");
         });
 

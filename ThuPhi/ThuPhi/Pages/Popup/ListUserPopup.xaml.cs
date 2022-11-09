@@ -33,10 +33,6 @@ namespace ThuPhi.Pages.Popup
 
             foreach (var user in _detail.Items)
             {
-                user.Code = null;
-                user.Pay = null;
-                user.Time = null;
-
                 Users.Add(new Template { IsChecked = true, Name = user.Name });
             }
             list.ItemsSource = Users;
@@ -44,11 +40,12 @@ namespace ThuPhi.Pages.Popup
 
         private void okBtn_Clicked(object sender, EventArgs e)
         {
-            for (int i = 0; i < Users.Count; i++)
+            for (int i = Users.Count - 1; i >= 0; i--)
             {
                 if(!Users[i].IsChecked)
                 {
                     _detail.Items.RemoveAt(i);
+                    Users.RemoveAt(i);
                 }    
             }
 
