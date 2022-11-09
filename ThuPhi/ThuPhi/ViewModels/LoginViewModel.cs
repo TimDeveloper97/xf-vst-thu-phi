@@ -89,6 +89,13 @@ namespace ThuPhi.ViewModels
             finally
             {
                 IsBusy = false;
+                
+                if(IsSave)
+                {
+                    Preferences.Set("save", "true");
+                    Preferences.Set("username", UserName);
+                    Preferences.Set("password", Password);
+                }    
             }
 
         });
@@ -104,15 +111,15 @@ namespace ThuPhi.ViewModels
         void Init()
         {
             Title = "Login";
-            UserName = "0989154248";
-            Password = "1";
             Languages = new ObservableCollection<string> { "English", "Vietnamese"};
         }
 
         void OnLoad()
         {
             SelectedLanguage = Preferences.Get("language", "English");
-            IsSave = Preferences.Get("save", false);
+            IsSave = bool.Parse(Preferences.Get("save", "false"));
+            UserName = Preferences.Get("username", null);
+            Password = Preferences.Get("password", null);
         }
         #endregion
     }

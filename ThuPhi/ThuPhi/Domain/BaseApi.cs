@@ -39,6 +39,8 @@ namespace ThuPhi.Domain
                     if (jBaseModel.Code != 0 || jBaseModel.Value == null)
                     {
                         DependencyService.Get<IMessage>().ShortAlert(jBaseModel.Message);
+                        if (jBaseModel.Code == 100)
+                            await Shell.Current.GoToAsync("//LoginPage");
                     }
                     else
                     {
@@ -84,6 +86,9 @@ namespace ThuPhi.Domain
                     if (jBaseModel.Code != 0 || jBaseModel.Value == null)
                     {
                         DependencyService.Get<IMessage>().ShortAlert(jBaseModel.Message);
+
+                        if(jBaseModel.Code == 100)
+                            await Shell.Current.GoToAsync("//LoginPage");
                     }
                     else
                     {
@@ -121,6 +126,9 @@ namespace ThuPhi.Domain
                     if (jBaseModel.Code != 0 || jBaseModel.Value == null)
                     {
                         DependencyService.Get<IMessage>().ShortAlert(jBaseModel.Message);
+                        if (jBaseModel.Code == 100)
+                            await Shell.Current.GoToAsync("//LoginPage");
+
                         return false;
                     }
 
